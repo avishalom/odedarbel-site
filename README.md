@@ -34,9 +34,8 @@ at `/en/`).
 
 ## Known follow-ups
 
-- **Hero image**: the hero currently uses a gradient placeholder, not a real photo —
-  swap in a full-bleed desert/nature photo (`src/components/Hero.astro`) to fully match
-  the reference design.
+- **Hero image**: uses a real desert photo (`public/images/hero-desert.jpg`), reused
+  from psychedelictherapy.co.il with Oded's OK, since he co-founded that program.
 - **Meditation recordings library** (`/meditationpractice`): the original site's
   password-protected recordings page hasn't been reviewed yet — see
   `docs/meditation-library-review.md`. Two provided passwords were rejected by the live

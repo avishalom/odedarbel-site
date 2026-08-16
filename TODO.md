@@ -11,18 +11,27 @@
 
 ## Content
 
-- [ ] Swap the hero gradient placeholder (`src/components/Hero.astro`) for a real
-      full-bleed desert/nature photo — didn't want to pull one from the web without
-      sign-off.
+- [x] Hero photo: replaced the gradient placeholder with the real desert photo, reused
+      (with Oded's OK) from psychedelictherapy.co.il, which he co-founded —
+      `public/images/hero-desert.jpg`, wired into `src/components/Hero.astro`.
+- [x] Publications list and video embeds on the homepage: replaced the AI-paraphrased
+      summary with verbatim citations and the 4 real embedded YouTube videos pulled
+      from the live odedarbel.com homepage (see `src/pages/index.astro` /
+      `src/pages/en/index.astro`).
+- [ ] Podcast episode links: exact titles are now listed (4 episodes under "וידאו /
+      אודיו" / "Video / Audio"), but not linked — couldn't extract the underlying
+      Spotify/podcast URLs from the live site's DOM. Get the actual episode links from
+      Oded and wire them up as embeds or links.
 - [ ] Full content review of `/psychadelicresearchandtherapy` — the original page had
       almost no body text (just nav + background image), so the rebuilt page is
       thin. Needs real copy from Oded about the unit's services and active research.
 - [ ] Native-speaker review of the English pages (`src/pages/en/`) — currently a
       first-pass translation of the Hebrew content, not professionally checked.
-- [ ] Double-check the "personal note," publications list, and video/audio list on the
-      homepage against the live site — these were reconstructed via an AI page-content
-      summarizer (browser tool was down for part of the scrape), so exact wording,
-      citations, and links should be verified rather than trusted verbatim.
+- [ ] Double-check the "personal note" and "read more" bio text on the homepage against
+      the live site — these were reconstructed via an AI page-content summarizer
+      (browser tool was down for part of the scrape), so exact wording should be
+      verified rather than trusted verbatim. (Publications and video/audio are now
+      verified — see above.)
 
 ## Functionality
 

@@ -74,35 +74,86 @@ import { withBase } from '../i18n';
 				<summary>פירסומים</summary>
 				<ul>
 					<li>
-						Arluk et al. (2022) — "MDMA treatment paired with a trauma-cue promotes adaptive stress
-						responses in a translational model of PTSD in rats", <em>Translational Psychiatry</em>
+						Arluk, Matar, Carmi, Arbel, Zohar, Todder & Cohen (2022) — "MDMA treatment paired with a
+						trauma-cue promotes adaptive stress responses in a translational model of PTSD in rats",
+						<em>Translational Psychiatry</em>, 12, doi:10.1038/s41398-022-01952-8
 					</li>
 					<li>
-						Cohen et al. (2022, 2019) — "Attentional Networks during the Menstrual Cycle", <em
-							>Behavioral Brain Research</em
-						>
+						Cohen, Gotlieb, Erez, Wiznitzer, Arbel, Matas, Koren & Henik (2022) — "Attentional
+						Networks during the Menstrual Cycle", <em>Behavioral Brain Research</em>, 425, 113817,
+						doi:10.1016/j.bbr.2022.113817
 					</li>
 					<li>
-						Cohen, Reiner, Shmulevich & Arbel (2016) — מחקר על התערבויות מיינדפולנס במרכז לבריאות
-						הנפש באר שבע, <em>הרפואה</em>
+						Cohen, Gotlieb, Erez, Wiznitzer, Arbel, Matas, Koren & Henik (2019) — "Attentional
+						Networks during the Menstrual Cycle", doi:10.1101/717264
+					</li>
+					<li>
+						Cohen, Reiner, Shmulevich & Arbel (2016) — "Seeds of Mindfulness in the Desert:
+						Preliminary Results from a Clinical Trial in the Mindfulness Clinic Mental Health
+						Center, Beer Sheva", <em>Harefuah</em>, 155, 745–748
 					</li>
 					<li>
 						Arbel (2014) — "Sowing the Seeds of Mindfulness: Experiences from the Israeli Desert
-						Mindfulness Clinic", <em>Mindfulness</em>
+						Mindfulness Clinic", <em>Mindfulness</em>, 5, doi:10.1007/s12671-013-0255-1
 					</li>
-					<li>Arbel (2011, 2012) — מחקרים על יישום טיפולים מבוססי מיינדפולנס במסגרות פסיכיאטריות אשפוזיות</li>
+					<li>
+						Arbel (2012) — "Mindfulness in a Psychiatric Hospital", <em
+							>The Israel Journal of Psychiatry and Related Sciences</em
+						>, 49, 16
+					</li>
+					<li>
+						Arbel, Shalev & Kaplan (2011) — "Implementing Mindfulness-Based Therapies as Part of the
+						Comprehensive Treatments in Beer Sheba Mental Health Center", <em>Harefuah</em>, 150,
+						676–80, 686, 685
+					</li>
 				</ul>
 			</details>
 			<details>
 				<summary>וידאו / אודיו</summary>
-				<p>
-					<strong>פודקאסטים</strong>: התאוששות מטראומה לאחר 7 באוקטובר, בודהיזם ופילוסופיה מזרחית,
-					פסיכותרפיה פסיכדלית, מדיטציה.
-				</p>
-				<p>
-					<strong>הרצאות מוקלטות</strong>: הרצאות על מיינדפולנס, כנסי מטפלים (2018), שיחות עם פרופ'
-					יעקב רז, מתודולוגיית מדיטציה בודהיסטית.
-				</p>
+				<div class="video-grid">
+					<div class="video-embed">
+						<iframe
+							src="https://www.youtube-nocookie.com/embed/ceIX9lh-c2A"
+							title='ד"ר ארבל: מדיטציה בודהיסטית - למה ואיך'
+							loading="lazy"
+							allowfullscreen
+						></iframe>
+					</div>
+					<div class="video-embed">
+						<iframe
+							src="https://www.youtube-nocookie.com/embed/L2hQel4lJHs"
+							title='בריאות 2 עם ד"ר ולפיש: מיינדפולנס'
+							loading="lazy"
+							allowfullscreen
+						></iframe>
+					</div>
+					<div class="video-embed">
+						<iframe
+							src="https://www.youtube-nocookie.com/embed/MxUhgrJxGHA"
+							title='ד"ר עודד ארבל — ראיון עם אלון סיגו'
+							loading="lazy"
+							allowfullscreen
+						></iframe>
+					</div>
+					<div class="video-embed">
+						<iframe
+							src="https://www.youtube-nocookie.com/embed/lOICF6JJ7gE"
+							title='שיחה בין יעקב רז וד"ר עודד ארבל'
+							loading="lazy"
+							allowfullscreen
+						></iframe>
+					</div>
+				</div>
+				<p><strong>פודקאסטים</strong></p>
+				<ul>
+					<li>RAW: One Year On - Healing the Trauma of Oct 7</li>
+					<li>
+						להתעורר - מבוא לבודהיזם ופילוסופיה של המזרח: שיחה על מדיטציה, טיפול פסיכיאטרי, ומשני
+						תודעה
+					</li>
+					<li>מחוץ לקופסא - שעה על פסיכולוגיה: פסיכותרפיה פסיכדלית</li>
+					<li>תחושת בטן: על אמונה, משני תודעה ומדיטציה</li>
+				</ul>
 			</details>
 		</div>
 	</section>
@@ -162,5 +213,25 @@ import { withBase } from '../i18n';
 	.triad-cta {
 		text-align: center;
 		margin-top: var(--space-4);
+	}
+	.video-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+		gap: var(--space-2);
+		margin-block: var(--space-2);
+	}
+	.video-embed {
+		position: relative;
+		aspect-ratio: 16 / 9;
+		border-radius: 0.5rem;
+		overflow: hidden;
+		background: var(--color-navy);
+	}
+	.video-embed iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
 	}
 </style>

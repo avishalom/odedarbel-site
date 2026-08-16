@@ -80,35 +80,86 @@ import { withBase } from '../../i18n';
 				<summary>Publications</summary>
 				<ul>
 					<li>
-						Arluk et al. (2022) — "MDMA treatment paired with a trauma-cue promotes adaptive stress
-						responses in a translational model of PTSD in rats", <em>Translational Psychiatry</em>
+						Arluk, Matar, Carmi, Arbel, Zohar, Todder & Cohen (2022) — "MDMA treatment paired with a
+						trauma-cue promotes adaptive stress responses in a translational model of PTSD in rats",
+						<em>Translational Psychiatry</em>, 12, doi:10.1038/s41398-022-01952-8
 					</li>
 					<li>
-						Cohen et al. (2022, 2019) — "Attentional Networks during the Menstrual Cycle", <em
-							>Behavioral Brain Research</em
-						>
+						Cohen, Gotlieb, Erez, Wiznitzer, Arbel, Matas, Koren & Henik (2022) — "Attentional
+						Networks during the Menstrual Cycle", <em>Behavioral Brain Research</em>, 425, 113817,
+						doi:10.1016/j.bbr.2022.113817
 					</li>
 					<li>
-						Cohen, Reiner, Shmulevich & Arbel (2016) — study on mindfulness interventions at Beer
-						Sheva Mental Health Center, <em>Harefuah</em>
+						Cohen, Gotlieb, Erez, Wiznitzer, Arbel, Matas, Koren & Henik (2019) — "Attentional
+						Networks during the Menstrual Cycle", doi:10.1101/717264
+					</li>
+					<li>
+						Cohen, Reiner, Shmulevich & Arbel (2016) — "Seeds of Mindfulness in the Desert:
+						Preliminary Results from a Clinical Trial in the Mindfulness Clinic Mental Health
+						Center, Beer Sheva", <em>Harefuah</em>, 155, 745–748
 					</li>
 					<li>
 						Arbel (2014) — "Sowing the Seeds of Mindfulness: Experiences from the Israeli Desert
-						Mindfulness Clinic", <em>Mindfulness</em>
+						Mindfulness Clinic", <em>Mindfulness</em>, 5, doi:10.1007/s12671-013-0255-1
 					</li>
-					<li>Arbel (2011, 2012) — studies on implementing mindfulness-based treatment in inpatient psychiatric settings</li>
+					<li>
+						Arbel (2012) — "Mindfulness in a Psychiatric Hospital", <em
+							>The Israel Journal of Psychiatry and Related Sciences</em
+						>, 49, 16
+					</li>
+					<li>
+						Arbel, Shalev & Kaplan (2011) — "Implementing Mindfulness-Based Therapies as Part of the
+						Comprehensive Treatments in Beer Sheba Mental Health Center", <em>Harefuah</em>, 150,
+						676–80, 686, 685
+					</li>
 				</ul>
 			</details>
 			<details>
 				<summary>Video / Audio</summary>
-				<p>
-					<strong>Podcasts</strong>: trauma recovery after October 7th, Buddhism and Eastern
-					philosophy, psychedelic psychotherapy, meditation.
-				</p>
-				<p>
-					<strong>Recorded talks</strong>: talks on mindfulness, practitioner conferences (2018),
-					conversations with Prof. Jacob Raz, Buddhist meditation methodology.
-				</p>
+				<div class="video-grid">
+					<div class="video-embed">
+						<iframe
+							src="https://www.youtube-nocookie.com/embed/ceIX9lh-c2A"
+							title="Dr. Arbel: Buddhist Meditation - Why and How"
+							loading="lazy"
+							allowfullscreen
+						></iframe>
+					</div>
+					<div class="video-embed">
+						<iframe
+							src="https://www.youtube-nocookie.com/embed/L2hQel4lJHs"
+							title="Health 2 with Dr. Valfish: Mindfulness"
+							loading="lazy"
+							allowfullscreen
+						></iframe>
+					</div>
+					<div class="video-embed">
+						<iframe
+							src="https://www.youtube-nocookie.com/embed/MxUhgrJxGHA"
+							title="Dr. Oded Arbel — interview with Alon Sigo"
+							loading="lazy"
+							allowfullscreen
+						></iframe>
+					</div>
+					<div class="video-embed">
+						<iframe
+							src="https://www.youtube-nocookie.com/embed/lOICF6JJ7gE"
+							title="A conversation between Jacob Raz and Dr. Oded Arbel"
+							loading="lazy"
+							allowfullscreen
+						></iframe>
+					</div>
+				</div>
+				<p><strong>Podcasts</strong></p>
+				<ul>
+					<li>RAW: One Year On - Healing the Trauma of Oct 7</li>
+					<li>
+						L'hitorer (Awakening) - Introduction to Buddhism and Eastern Philosophy: a conversation
+						on meditation, psychiatric treatment, and psychedelics
+					</li>
+					<li>Michutz LaKufsa (Outside the Box) - An Hour on Psychology: Psychedelic Psychotherapy</li>
+					<li>Tchushat Beten (Gut Feeling): on faith, psychedelics, and meditation</li>
+				</ul>
 			</details>
 		</div>
 	</section>
@@ -168,5 +219,25 @@ import { withBase } from '../../i18n';
 	.triad-cta {
 		text-align: center;
 		margin-top: var(--space-4);
+	}
+	.video-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+		gap: var(--space-2);
+		margin-block: var(--space-2);
+	}
+	.video-embed {
+		position: relative;
+		aspect-ratio: 16 / 9;
+		border-radius: 0.5rem;
+		overflow: hidden;
+		background: var(--color-navy);
+	}
+	.video-embed iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
 	}
 </style>
