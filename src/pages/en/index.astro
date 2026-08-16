@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FeatureTriad from '../../components/FeatureTriad.astro';
+import PillButton from '../../components/PillButton.astro';
+---
+
+<BaseLayout
+	locale="en"
+	currentPath="/en/"
+	title="Home"
+	description="Dr. Oded Arbel — psychiatrist, integrative psychiatry, mindfulness, and psychedelic psychotherapy."
+>
+	<Hero
+		title="Dr. Oded Arbel"
+		quote="To be in harmony with the oneness of all things is to be without anxiety about imperfections"
+		quoteAttribution="Dōgen Zenji (1200–1253, Japan)"
+		imageAlt="A desert landscape of dunes and mountains, evoking the natural setting of the clinical work"
+	/>
+
+	<section>
+		<div class="container bio">
+			<p>
+				Specialist psychiatrist, graduate of the Tel Aviv University School of Medicine and its
+				Psychoanalytic Psychotherapy program.
+			</p>
+			<p>Sees patients privately for psychotherapy and consultation at clinics in Tel Aviv and Tal Shahar.</p>
+			<p>
+				Facilitates meditation groups for patients and staff, works individually across a range of
+				disorders, and teaches and trains therapists in Buddhist psychology and mindfulness-based
+				approaches.
+			</p>
+			<p>
+				A psychedelic psychotherapy training program launches in the coming academic year. Details:
+				<a href="https://www.psychedelictherapy.co.il">psychedelictherapy.co.il</a>
+			</p>
+			<details>
+				<summary>Read more</summary>
+				<p>
+					Specialist psychiatrist, graduate of the Tel Aviv University School of Medicine and its
+					Psychoanalytic Psychotherapy program, with residency in psychiatry at the "Shalvata"
+					Mental Health Center in Hod Hasharon.
+				</p>
+				<p>
+					Director of the "Gvim" day-treatment unit at Beer Sheva Mental Health Center, treating
+					anxiety, depression, and — primarily — survivors of complex sexual and other trauma.
+					Founder and head of the mindfulness clinic at Beer Sheva Mental Health Center and of its
+					Zen Buddhist-oriented experiential psychotherapy training program. Head of the hospital's
+					Psychedelic Treatment and Research Unit, and co-founder of the psychedelic psychotherapy
+					program.
+				</p>
+				<p>
+					Provides psychiatric consultation and psychotherapy in a dynamic, psychoanalytic
+					orientation alongside body-based experiential psychotherapy at the Tal Shahar clinic.
+				</p>
+				<p>
+					Graduate of the Psychodharma therapists' program — founded in 1998 by Prof. Jacob Raz and
+					Nahi Alon — which brings therapists and professionals from various fields into contact
+					with Buddhism through study, experience, and practice; now a member of the school's
+					teaching faculty. Certified Shiatsu practitioner. Black belt in Karate, scuba diving
+					instructor, and an aspiring bamboo-flute player.
+				</p>
+				<p>
+					A student of Prof. Raz, practicing and teaching in the Zen Buddhist tradition. Extensive
+					experience facilitating meditation groups and therapy groups in mindfulness-based and
+					dynamic orientations.
+				</p>
+			</details>
+			<details>
+				<summary>A personal note</summary>
+				<p>
+					A meditation practitioner since 1997. Lives in Moshav Tal Shahar, growing 450 trees with
+					his two sons. His work integrates Buddhist principles with dynamic psychotherapy,
+					body/experience-based approaches, and psychedelic research, aiming to ease psychological
+					suffering.
+				</p>
+			</details>
+			<details>
+				<summary>Publications</summary>
+				<ul>
+					<li>
+						Arluk et al. (2022) — "MDMA treatment paired with a trauma-cue promotes adaptive stress
+						responses in a translational model of PTSD in rats", <em>Translational Psychiatry</em>
+					</li>
+					<li>
+						Cohen et al. (2022, 2019) — "Attentional Networks during the Menstrual Cycle", <em
+							>Behavioral Brain Research</em
+						>
+					</li>
+					<li>
+						Cohen, Reiner, Shmulevich & Arbel (2016) — study on mindfulness interventions at Beer
+						Sheva Mental Health Center, <em>Harefuah</em>
+					</li>
+					<li>
+						Arbel (2014) — "Sowing the Seeds of Mindfulness: Experiences from the Israeli Desert
+						Mindfulness Clinic", <em>Mindfulness</em>
+					</li>
+					<li>Arbel (2011, 2012) — studies on implementing mindfulness-based treatment in inpatient psychiatric settings</li>
+				</ul>
+			</details>
+			<details>
+				<summary>Video / Audio</summary>
+				<p>
+					<strong>Podcasts</strong>: trauma recovery after October 7th, Buddhism and Eastern
+					philosophy, psychedelic psychotherapy, meditation.
+				</p>
+				<p>
+					<strong>Recorded talks</strong>: talks on mindfulness, practitioner conferences (2018),
+					conversations with Prof. Jacob Raz, Buddhist meditation methodology.
+				</p>
+			</details>
+		</div>
+	</section>
+
+	<section class="cream">
+		<div class="container">
+			<FeatureTriad
+				items={[
+					{
+						icon: 'plant',
+						title: 'Integrative Psychiatry',
+						text: 'A body of knowledge and clinical practice grounded in Western medicine, psychodynamic psychotherapy, and Buddhist philosophy.',
+					},
+					{
+						icon: 'hands',
+						title: 'Mindfulness & the Body',
+						text: 'Meaningful presence to the bodily dimension of experience, compassion, and sustained attention to the present moment.',
+					},
+					{
+						icon: 'mushroom',
+						title: 'Psychedelic Psychotherapy',
+						text: "Head of the Psychedelic Treatment and Research Unit, and co-founder of the psychedelic psychotherapy program.",
+					},
+				]}
+			/>
+			<p class="triad-cta">
+				<PillButton href="/en/psychadelicresearchandtherapy" variant="outline">Read more</PillButton>
+			</p>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<h2>Get in touch</h2>
+			<p>Phone: 050-6576691</p>
+			<p>Email: <a href="mailto:oded.arbel@gmail.com">oded.arbel@gmail.com</a></p>
+			<p>Clinic: Moshav Tal Shahar</p>
+			<PillButton href="/en/contact">Contact</PillButton>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.bio {
+		max-width: 42rem;
+	}
+	details {
+		margin-block: var(--space-2);
+		border-top: 1px solid rgba(26, 43, 60, 0.12);
+		padding-top: var(--space-2);
+	}
+	summary {
+		cursor: pointer;
+		font-weight: 600;
+		color: var(--color-navy);
+	}
+	.triad-cta {
+		text-align: center;
+		margin-top: var(--space-4);
+	}
+</style>

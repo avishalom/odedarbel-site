@@ -1,0 +1,43 @@
+---
+interface Props {
+	href: string;
+	variant?: 'solid' | 'outline';
+}
+const { href, variant = 'solid' } = Astro.props;
+---
+
+<a href={href} class={`pill-button ${variant}`}>
+	<slot />
+</a>
+
+<style>
+	.pill-button {
+		display: inline-block;
+		padding: 0.85rem 2rem;
+		border-radius: var(--radius-pill);
+		font-family: var(--font-body);
+		font-weight: 600;
+		text-decoration: none;
+		border: 2px solid var(--color-teal);
+		transition: background-color 0.15s ease, color 0.15s ease;
+	}
+	:lang(he) .pill-button {
+		font-family: var(--font-body-he);
+	}
+	.pill-button.solid {
+		background: var(--color-teal);
+		color: var(--color-white);
+	}
+	.pill-button.solid:hover {
+		background: var(--color-teal-dark);
+		border-color: var(--color-teal-dark);
+	}
+	.pill-button.outline {
+		background: transparent;
+		color: var(--color-teal);
+	}
+	.pill-button.outline:hover {
+		background: var(--color-teal);
+		color: var(--color-white);
+	}
+</style>

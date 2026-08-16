@@ -1,0 +1,30 @@
+---
+import type { Locale } from '../i18n';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Props {
+	locale: Locale;
+	currentPath: string;
+	title: string;
+	description: string;
+}
+const { locale, currentPath, title, description } = Astro.props;
+---
+
+<BaseLayout locale={locale} currentPath={currentPath} title={title} description={description}>
+	<section>
+		<div class="container prose">
+			<h1>{title}</h1>
+			<slot />
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.prose :global(h2) {
+		margin-top: var(--space-4);
+	}
+	.prose {
+		max-width: 42rem;
+	}
+</style>

@@ -1,0 +1,75 @@
+---
+interface Props {
+	title: string;
+	quote?: string;
+	quoteAttribution?: string;
+	imageAlt?: string;
+}
+const { title, quote, quoteAttribution, imageAlt } = Astro.props;
+---
+
+<section class="hero">
+	<div class="hero-bg" role={imageAlt ? 'img' : undefined} aria-label={imageAlt}></div>
+	<div class="hero-overlay"></div>
+	<div class="container hero-content">
+		<h1>{title}</h1>
+		{quote && (
+			<blockquote>
+				<p>{quote}</p>
+				{quoteAttribution && <cite>{quoteAttribution}</cite>}
+			</blockquote>
+		)}
+	</div>
+</section>
+
+<style>
+	.hero {
+		position: relative;
+		min-height: 60vh;
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+	}
+	.hero-bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+		/* Placeholder gradient standing in for a desert/nature photo — swap in a
+		   real full-bleed photograph (see README) to fully match the reference site. */
+		background: linear-gradient(180deg, #a9c4d6 0%, #d8c9a8 45%, #b89a6e 75%, #8a6f47 100%);
+	}
+	.hero-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(26, 43, 60, 0.35), rgba(26, 43, 60, 0.55));
+		z-index: 1;
+	}
+	.hero-content {
+		position: relative;
+		z-index: 2;
+		text-align: center;
+		color: var(--color-white);
+	}
+	.hero h1 {
+		color: var(--color-white);
+		font-size: clamp(2.25rem, 5vw, 3.5rem);
+		text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+	}
+	blockquote {
+		margin: var(--space-3) auto 0;
+		max-width: 40rem;
+		font-style: italic;
+	}
+	blockquote p {
+		color: var(--color-white);
+		font-size: 1.1rem;
+	}
+	cite {
+		display: block;
+		margin-top: var(--space-1);
+		color: var(--color-cream);
+		font-size: 0.95rem;
+	}
+</style>

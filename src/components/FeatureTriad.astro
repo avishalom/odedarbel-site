@@ -1,0 +1,58 @@
+---
+interface Item {
+	icon: 'mushroom' | 'hands' | 'plant';
+	title: string;
+	text: string;
+}
+interface Props {
+	items: Item[];
+}
+const { items } = Astro.props;
+
+const icons: Record<Item['icon'], string> = {
+	mushroom:
+		'<path d="M12 3c4 0 7 2.4 7 5.4 0 1.1-.7 1.8-1.8 1.8H6.8C5.7 10.2 5 9.5 5 8.4 5 5.4 8 3 12 3Z"/><path d="M12 10.2V19a2 2 0 1 1-4 0"/>',
+	hands:
+		'<path d="M7 12V6.5a1.5 1.5 0 0 1 3 0V11"/><path d="M10 11V5a1.5 1.5 0 0 1 3 0v6"/><path d="M13 11V6.5a1.5 1.5 0 0 1 3 0V13"/><path d="M16 13v-2a1.5 1.5 0 0 1 3 0v4a5 5 0 0 1-5 5h-2a6 6 0 0 1-5-3l-2-3.2c-.5-.9-.1-1.9.8-2.2.7-.2 1.4.1 1.8.7L9 15"/>',
+	plant:
+		'<path d="M12 21V9"/><path d="M12 9C12 5.5 9.5 3 6 3c0 3.5 2.5 6 6 6Z"/><path d="M12 12c0-3.5 2.5-6 6-6 0 3.5-2.5 6-6 6Z"/>',
+};
+---
+
+<div class="triad">
+	{items.map((item) => (
+		<div class="triad-item">
+			<span class="icon-badge" aria-hidden="true">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={icons[item.icon]} />
+			</span>
+			<h3>{item.title}</h3>
+			<p>{item.text}</p>
+		</div>
+	))}
+</div>
+
+<style>
+	.triad {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		gap: var(--space-4);
+	}
+	.triad-item {
+		text-align: center;
+	}
+	.icon-badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 4.5rem;
+		height: 4.5rem;
+		border-radius: 50%;
+		border: 2px solid var(--color-brown);
+		color: var(--color-brown);
+		margin-bottom: var(--space-2);
+	}
+	.icon-badge svg {
+		width: 2rem;
+		height: 2rem;
+	}
+</style>

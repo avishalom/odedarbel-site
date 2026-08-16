@@ -1,0 +1,61 @@
+---
+import type { Locale } from '../i18n';
+interface Props {
+	locale: Locale;
+}
+const { locale } = Astro.props;
+const strings = {
+	he: {
+		heading: 'ד"ר עודד ארבל',
+		phone: 'עודד: 050-6576691',
+		email: 'מייל: oded.arbel@gmail.com',
+		clinic: 'קליניקה: מושב טל שחר',
+		rights: 'כל הזכויות שמורות',
+	},
+	en: {
+		heading: 'Dr. Oded Arbel',
+		phone: 'Phone: 050-6576691',
+		email: 'Email: oded.arbel@gmail.com',
+		clinic: 'Clinic: Moshav Tal Shahar',
+		rights: 'All rights reserved',
+	},
+};
+const t = strings[locale];
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="container footer-inner">
+		<div>
+			<h2>{t.heading}</h2>
+			<p>{t.phone}</p>
+			<p><a href="mailto:oded.arbel@gmail.com">{t.email}</a></p>
+			<p>{t.clinic}</p>
+		</div>
+		<p class="rights">&copy; {year} {t.heading} — {t.rights}</p>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		background: var(--color-navy);
+		color: var(--color-cream);
+		padding-block: var(--space-4);
+		margin-top: var(--space-5);
+	}
+	.footer-inner h2 {
+		color: var(--color-cream);
+	}
+	.footer-inner p {
+		color: var(--color-cream);
+		opacity: 0.85;
+	}
+	.footer-inner a {
+		color: var(--color-cream);
+	}
+	.rights {
+		margin-top: var(--space-3);
+		font-size: 0.875rem;
+		opacity: 0.7;
+	}
+</style>
