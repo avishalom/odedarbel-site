@@ -15,8 +15,9 @@
 - [ ] **Meditation library audio files**: the new site's `/meditationlibrary` (see
       "Meditation recordings library" below) lists the 4 real recordings (titles,
       durations, descriptions) but doesn't host the actual audio yet — need the audio
-      files themselves from Oded to embed players, and a decision on whether they
-      should be public or stay behind the password gate.
+      files themselves from Oded to embed players or direct per-recording links, and
+      a decision on whether they should be public or stay behind the password gate.
+      Current page links are temporary fallbacks to the old Wix library/email.
 
 ## Content
 
