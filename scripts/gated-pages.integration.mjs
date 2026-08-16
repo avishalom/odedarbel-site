@@ -36,12 +36,6 @@ function encrypt(plaintext, password) {
 	};
 }
 
-function extractBody(html) {
-	const match = html.match(/<body[^>]*>([\s\S]*)<\/body>/);
-	if (!match) throw new Error('Could not find <body> in raw page HTML');
-	return match[1];
-}
-
 async function encryptGatedPages(distDir, logger) {
 	await loadDotEnvIfExists();
 
@@ -60,8 +54,7 @@ async function encryptGatedPages(distDir, logger) {
 		if (!existsSync(loaderPath)) throw new Error(`Loader page not built: ${loaderPath}`);
 
 		const rawHtml = await readFile(rawPath, 'utf8');
-		const bodyHtml = extractBody(rawHtml);
-		const { iv, cipher } = encrypt(bodyHtml, password);
+		const { iv, cipher } = encrypt(rawHtml, password);
 
 		let loaderHtml = await readFile(loaderPath, 'utf8');
 		if (!loaderHtml.includes('__GATE_IV__') || !loaderHtml.includes('__GATE_CIPHER__')) {

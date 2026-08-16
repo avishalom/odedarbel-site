@@ -1,6 +1,8 @@
 export type PageSeoEntry = {
 	title: string;
+	lockedTitle?: string;
 	description: string;
+	lockedDescription?: string;
 	ogTitle?: string;
 	noindex?: boolean;
 };
@@ -28,12 +30,16 @@ export const pageSeo: Record<'he' | 'en', Record<string, PageSeoEntry>> = {
 		},
 		'/meditationlibrary': {
 			title: 'ספריית הקלטות מדיטציה',
+			lockedTitle: 'אזור מוגן',
 			description: 'ספריית הקלטות מדיטציה מודרכת — גישה מוגנת בסיסמה.',
+			lockedDescription: 'עמוד מוגן בסיסמה.',
 			noindex: true,
 		},
 		'/therapistdoc': {
 			title: 'ספריית תוכנית המטפלים',
+			lockedTitle: 'אזור מוגן',
 			description: 'חומרי קריאה לתוכנית המטפלים — גישה מוגנת בסיסמה.',
+			lockedDescription: 'עמוד מוגן בסיסמה.',
 			noindex: true,
 		},
 		'/psychadelicresearchandtherapy': {
@@ -73,12 +79,16 @@ export const pageSeo: Record<'he' | 'en', Record<string, PageSeoEntry>> = {
 		},
 		'/en/meditationlibrary': {
 			title: 'Meditation Recordings Library',
+			lockedTitle: 'Protected Area',
 			description: 'Guided meditation recordings library — password protected.',
+			lockedDescription: 'Password-protected page.',
 			noindex: true,
 		},
 		'/en/therapistdoc': {
 			title: 'Therapists Program Library',
+			lockedTitle: 'Protected Area',
 			description: 'Therapists Program reading materials — password protected.',
+			lockedDescription: 'Password-protected page.',
 			noindex: true,
 		},
 		'/en/psychadelicresearchandtherapy': {

@@ -5,6 +5,12 @@ import { pageSeo } from '../seo';
 const seo = pageSeo.he['/therapistdoc'];
 ---
 
-<BaseLayout locale="he" currentPath="/therapistdoc" title={seo.title} description={seo.description} noindex={seo.noindex}>
+<BaseLayout
+	locale="he"
+	currentPath="/therapistdoc"
+	title={seo.lockedTitle ?? seo.title}
+	description={seo.lockedDescription ?? seo.description}
+	noindex={seo.noindex}
+>
 	<PasswordGate locale="he" />
 </BaseLayout>

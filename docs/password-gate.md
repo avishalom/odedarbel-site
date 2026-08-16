@@ -10,13 +10,17 @@ at build time:
    by anyone comfortable with Markdown.
 2. **Raw page** — `src/pages/raw-content/**` renders that MDX through the
    normal site layout (`ProsePage` + `BaseLayout`), so it looks like any other
-   page. Astro builds it like any other route.
+   page. Astro builds it like any other route. This page uses the real
+   unlocked title.
 3. **Loader page** — the real public route (e.g. `src/pages/meditationlibrary.astro`)
    renders `<PasswordGate />`: a password field plus a hidden payload
-   placeholder (`__GATE_IV__` / `__GATE_CIPHER__`).
+   placeholder (`__GATE_IV__` / `__GATE_CIPHER__`). It can use the SEO entry's
+   `lockedTitle` and `lockedDescription` so browser/SEO metadata is generic
+   before unlock; after unlock, the full decrypted raw document replaces it and
+   the tab switches to the real page metadata.
 4. **Astro build integration** (`scripts/gated-pages.integration.mjs`, registered
    in `astro.config.mjs`)
-   reads each raw page's rendered `<body>`, encrypts it (AES-256-GCM, key =
+   reads each raw page's full rendered HTML document, encrypts it (AES-256-GCM, key =
    SHA-256 of the plain password, via Node's `crypto`), writes the ciphertext
    into the loader page's placeholders, and deletes the raw page's output so
    the plaintext never ships in `dist/`.
@@ -27,8 +31,11 @@ at build time:
    raw routes, and `_gated` URLs from the sitemap.
 6. **Client-side**: `PasswordGate.astro`'s script derives the same AES key
    from whatever the visitor types (SHA-256 → `SubtleCrypto`), tries to
-   decrypt, and on success replaces `document.body.innerHTML` with the
-   decrypted content — no page reload, no server round-trip.
+   decrypt, and on success writes the decrypted full document with
+   `document.open()` / `document.write()` / `document.close()`. This lets the
+   browser parse the unlocked page normally, including Astro-emitted module
+   scripts and hydrated/client-side components — no page reload, no server
+   round-trip.
 
 ## Why this is intentionally weak
 
