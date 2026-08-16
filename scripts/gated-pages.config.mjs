@@ -26,4 +26,8 @@ export const gatedAssetDirectories = [
 		source: 'gated-assets/therapist-library',
 		output: '_gated/therapist-library',
 	},
+	{
+		source: 'gated-assets/meditation-library',
+		output: '_gated/meditation-library',
+	},
 ];

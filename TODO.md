@@ -2,15 +2,6 @@
 
 ## Blocked — need input from Oded
 
-- [ ] **Meditation library audio files**: the new site's `/meditationlibrary` (see
-      "Meditation recordings library" below) lists the 4 real recordings (titles,
-      durations, descriptions) but doesn't host the actual audio yet. Verified in code:
-      there are no audio files under `public/`, `src/`, or `gated-assets/`, and
-      `src/content/gated/*/meditation-library.mdx` still contains a note saying the
-      files are missing. Need the audio files themselves from Oded to embed players or
-      direct per-recording links, and a decision on whether they should be public or
-      stay behind the password gate. Current page links are temporary fallbacks to the
-      old Wix library/email.
 - [x] **Podcast episode links**: extracted the four Spotify episode URLs from the
       live odedarbel.com homepage and wired them into `src/pages/index.astro` and
       `src/pages/en/index.astro`.
@@ -32,8 +23,9 @@
       rebuilt as a password-gated page (see `docs/password-gate.md`) listing the 4 real
       recordings — titles, durations, one-line descriptions — sourced by logging into
       the original `/meditationrec` with the password Oded gave (`Backwardstep`).
-      `/meditationpractice` now links to it instead of the old Wix page. Audio files
-      themselves still need to be added — see "Blocked" above.
+      `/meditationpractice` now links to it instead of the old Wix page. The audio
+      files are now served from the new gated page via git LFS-tracked MP3s in
+      `gated-assets/meditation-library/`.
 - [x] Hero photo: replaced the gradient placeholder with the real desert photo, reused
       (with Oded's OK) from psychedelictherapy.co.il, which he co-founded —
       `public/images/hero-desert.jpg`, wired into `src/components/Hero.astro`.

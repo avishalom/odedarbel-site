@@ -1,38 +1,36 @@
-# Meditation recordings library — review & recommendation
+# Meditation recordings library — migrated
 
-## Status: blocked on access
+## Status: complete
 
-I haven't been able to actually see the current library yet:
+The old Wix password-protected page at `https://www.odedarbel.com/meditationrec`
+has four guided meditation recordings. They were downloaded and moved into the
+new site's password-gated library:
 
-- The `/meditationrec` page on the Wix site is password-protected. The password you
-  gave (`backwardstep`) was rejected by the login form when tested.
-- The Chrome browser tool disconnected mid-session before I could retry or explore
-  further, so I haven't seen the list of recordings, their naming, or how they're
-  currently organized.
+| Track | Duration | Local file |
+| --- | ---: | --- |
+| ריכוז בנשימה / Focus on the Breath | 10:12 | `gated-assets/meditation-library/focus-on-the-breath.mp3` |
+| סריקת גוף / Body Scan | 24:25 | `gated-assets/meditation-library/body-scan.mp3` |
+| קשב פתוח / Open Attention | 22:22 | `gated-assets/meditation-library/open-attention.mp3` |
+| הנחיות לזאזן / Zazen Instructions | 30:03 | `gated-assets/meditation-library/zazen-instructions.mp3` |
 
-**I need one of the following to actually review it:**
-1. The correct password, or
-2. A quick export/list from you (file names, titles, durations, dates) I can work from, or
-3. Temporary access some other way (e.g. a screen share or screenshots).
+The files are tracked by git LFS via `.gitattributes`:
 
-## Recommendation, based on the pattern used elsewhere on the site
+```gitattributes
+gated-assets/meditation-library/*.mp3 filter=lfs diff=lfs merge=lfs -text
+```
 
-Even without seeing the exact contents, the surrounding page (`/meditationpractice`)
-describes the library only as an undifferentiated set of "guided meditation
-recordings" with no visible structure (no categories, lengths, or dates called out).
-That matches "a mess" — likely a flat list of audio files with inconsistent titles.
-Once I can see the real list, I'd structure it like this:
+The Astro gated-pages integration copies them to
+`dist/_gated/meditation-library/` during `npm run build`. The public gated
+loader pages and `_gated` asset URLs are excluded from the generated sitemap by
+the sitemap filter in `astro.config.mjs`; the raw plaintext pages are removed
+from `dist` after encryption.
 
-- **Group by practice type** (e.g. breath-awareness, body scan, loving-kindness /
-  compassion, Zen-style sitting), not by upload date — visitors look for a *kind* of
-  practice, not a timeline.
-- **Consistent metadata per track**: title in plain language, duration, a one-line
-  description of what it's for, and language (if any are in English vs. Hebrew).
-- **Progressive disclosure**: short beginner tracks first, longer/advanced ones later,
-  rather than alphabetical or upload order.
-- **Access model**: decide deliberately whether this should stay password-gated for
-  patients/students only, or become a public resource (matches the "מדיטציה" page's
-  public framing) — right now it's inconsistent (public page, gated content).
+The page content is rendered from `src/meditationLibrary.ts` into both raw gated
+routes:
 
-I'll finalize this recommendation and build the actual page once I can see the real
-library contents.
+- `src/pages/raw-content/meditationlibrary.astro`
+- `src/pages/raw-content/en/meditationlibrary.astro`
+
+The source MDX files now only contain the page introduction text; track metadata
+and audio links are centralized in the TypeScript helper so the Hebrew and
+English pages stay in sync.
