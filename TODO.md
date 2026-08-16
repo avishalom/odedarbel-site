@@ -11,11 +11,9 @@
       direct per-recording links, and a decision on whether they should be public or
       stay behind the password gate. Current page links are temporary fallbacks to the
       old Wix library/email.
-- [ ] **Podcast episode links**: exact titles are listed (4 episodes under "וידאו /
-      אודיו" / "Video / Audio"), but not linked in `src/pages/index.astro` or
-      `src/pages/en/index.astro`. Couldn't extract the underlying Spotify/podcast URLs
-      from the live site's DOM. Get the actual episode links from Oded and wire them up
-      as embeds or links.
+- [x] **Podcast episode links**: extracted the four Spotify episode URLs from the
+      live odedarbel.com homepage and wired them into `src/pages/index.astro` and
+      `src/pages/en/index.astro`.
 - [ ] **Full content for `/psychadelicresearchandtherapy`**: both language pages still
       contain only a short summary and an in-page note that the original page had
       almost no body text. Needs real copy from Oded about the unit's services and
