@@ -2,14 +2,16 @@
 
 ## Blocked — need input from Oded
 
-- [ ] **Therapists program library** (`/therapistdoc` on the old Wix site, linked from
-      the "תכנית המטפלים" post as "ספריית תוכנית המטפלים"). `Mindthegap` (capital M)
-      works — it's a folder of 29 PDF reading texts (Hakomi, Suzuki, the Heart Sutra,
-      Barry Magid, Welwood, etc., titled "ספריית תוכנית המטפלים"). Not yet rebuilt on
-      the new site — need to decide: host the PDFs ourselves (requires the actual
-      files — no direct download links were exposed in the page DOM, only a per-row
-      "⋮" menu) or keep linking out to the gated Wix page. Should use the same
-      password-gate mechanism (`docs/password-gate.md`) once that's decided.
+- [ ] **IN PROGRESS — Therapists program library** (`/therapistdoc` on the old Wix
+      site). `Mindthegap` (capital M) works — it's a folder of **30** PDF reading texts
+      (Hakomi, Suzuki, the Heart Sutra, Barry Magid, Welwood, etc.). Decision already
+      made: download all 30 and host them ourselves via **git LFS**, moving this
+      content off Wix (same plan as the meditation library). Work is **mid-flight** —
+      full status, the complete 30-file list with real item IDs, the download API
+      details, and exact next steps to resume are all in
+      **`docs/therapist-library-download.md`**. Read that file first before
+      re-investigating anything — a lot of the discovery work (login flow quirks,
+      download mechanism, item ID extraction) is already done and documented there.
 - [ ] **Meditation library audio files**: the new site's `/meditationlibrary` (see
       "Meditation recordings library" below) lists the 4 real recordings (titles,
       durations, descriptions) but doesn't host the actual audio yet — need the audio

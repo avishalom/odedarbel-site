@@ -48,9 +48,12 @@ pins `node-version: 22` for this reason; do not downgrade it).
   were deliberately darkened from the reference site's literal values to pass WCAG AA
   contrast — see the comments inline before changing them.
 - **`content/` and `docs/`** are not part of the built site — `content/he/*.md` holds
-  the raw scraped source content from the original Wix site as a reference/archive,
-  and `docs/meditation-library-review.md` is planning notes for the still-unbuilt
-  meditation recordings library section.
+  the raw scraped source content from the original Wix site as a reference/archive.
+  `docs/password-gate.md` documents the client-side encrypted password-gate mechanism
+  used for the meditation library (`src/components/PasswordGate.astro`,
+  `scripts/encrypt-gated.mjs`). `docs/therapist-library-download.md` tracks an
+  in-progress task (downloading 30 PDFs off the old Wix site via git LFS) — check
+  `TODO.md`'s "Blocked" section and that file before starting related work.
 - **Deploy**: `.github/workflows/deploy.yml` builds and deploys to GitHub Pages via
   GitHub Actions (not the legacy `gh-pages` branch method) on every push to `main`.
   `astro.config.mjs` sets `base: '/odedarbel-site'` and every internal `href` is routed
