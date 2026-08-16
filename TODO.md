@@ -77,5 +77,10 @@
 - [x] Nav wraps awkwardly on narrower viewports (~900–1100px): replaced the wrapping
       header with a responsive menu. Verified collapsed/open mobile behavior at 390px,
       menu behavior at 1300px, and a single-row English desktop header at 1366px.
-- [ ] No images from the original site were migrated in (bio photo, section photos) —
-      only text content was scraped. Source and add these.
+- [x] Original bio photo: sourced Oded's portrait from the live Wix homepage, saved it
+      locally at `public/images/oded-arbel-portrait.jpg`, and wired it into both
+      homepage locales with responsive desktop/mobile layout.
+- [ ] Original section/gallery images: the live homepage includes an unlabeled
+      "השפעות" image gallery. Decide whether that gallery should be recreated on the
+      new site, and if so add meaningful labels/alt text instead of importing
+      unlabeled decorative thumbnails.

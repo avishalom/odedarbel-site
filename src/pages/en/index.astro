@@ -17,22 +17,26 @@ const seo = pageSeo.en['/en/'];
 	/>
 
 	<section>
-		<div class="container bio">
-			<p>
-				Specialist psychiatrist, graduate of the Tel Aviv University School of Medicine and its
-				Psychoanalytic Psychotherapy program.
-			</p>
-			<p>Sees patients privately for psychotherapy and consultation at clinics in Tel Aviv and Tal Shahar.</p>
-			<p>
-				Facilitates meditation groups for patients and staff, works individually across a range of
-				disorders, and teaches and trains therapists in Buddhist psychology and mindfulness-based
-				approaches.
-			</p>
-			<p>
-				A psychedelic psychotherapy training program launches in the coming academic year. Details:
-				<a href="https://www.psychedelictherapy.co.il">psychedelictherapy.co.il</a>
-			</p>
-			<details>
+		<div class="container bio-shell">
+			<figure class="bio-portrait">
+				<img src={withBase('/images/oded-arbel-portrait.jpg')} alt="Dr. Oded Arbel" loading="lazy" />
+			</figure>
+			<div class="bio">
+				<p>
+					Specialist psychiatrist, graduate of the Tel Aviv University School of Medicine and its
+					Psychoanalytic Psychotherapy program.
+				</p>
+				<p>Sees patients privately for psychotherapy and consultation at clinics in Tel Aviv and Tal Shahar.</p>
+				<p>
+					Facilitates meditation groups for patients and staff, works individually across a range of
+					disorders, and teaches and trains therapists in Buddhist psychology and mindfulness-based
+					approaches.
+				</p>
+				<p>
+					A psychedelic psychotherapy training program launches in the coming academic year. Details:
+					<a href="https://www.psychedelictherapy.co.il">psychedelictherapy.co.il</a>
+				</p>
+				<details>
 				<summary>Read more</summary>
 				<p>
 					Specialist psychiatrist, graduate of the Tel Aviv University School of Medicine and its
@@ -63,8 +67,8 @@ const seo = pageSeo.en['/en/'];
 					experience facilitating meditation groups and therapy groups in mindfulness-based and
 					dynamic orientations.
 				</p>
-			</details>
-			<details>
+				</details>
+				<details>
 				<summary>A personal note</summary>
 				<p>
 					In one of my earliest childhood memories, I am dozing at the edge of the meditation hall
@@ -79,8 +83,8 @@ const seo = pageSeo.en['/en/'];
 					I live in Tal Shahar, grow 450 trees, and have two sons. Every day, I am grateful for the
 					opportunity to be a student.
 				</p>
-			</details>
-			<details>
+				</details>
+				<details>
 				<summary>Publications</summary>
 				<ul>
 					<li>
@@ -117,8 +121,8 @@ const seo = pageSeo.en['/en/'];
 						676–80, 686, 685
 					</li>
 				</ul>
-			</details>
-			<details>
+				</details>
+				<details>
 				<summary>Video / Audio</summary>
 				<div class="video-grid">
 					<div class="video-embed">
@@ -164,7 +168,8 @@ const seo = pageSeo.en['/en/'];
 					<li>Michutz LaKufsa (Outside the Box) - An Hour on Psychology: Psychedelic Psychotherapy</li>
 					<li>Tchushat Beten (Gut Feeling): on faith, psychedelics, and meditation</li>
 				</ul>
-			</details>
+				</details>
+			</div>
 		</div>
 	</section>
 
@@ -210,6 +215,23 @@ const seo = pageSeo.en['/en/'];
 	.bio {
 		max-width: 42rem;
 	}
+	.bio-shell {
+		display: grid;
+		grid-template-columns: minmax(12rem, 18rem) minmax(0, 42rem);
+		align-items: start;
+		gap: var(--space-4);
+	}
+	.bio-portrait {
+		margin: 0;
+	}
+	.bio-portrait img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 1;
+		object-fit: cover;
+		border-radius: 0.5rem;
+		filter: sepia(0.08);
+	}
 	details {
 		margin-block: var(--space-2);
 		border-top: 1px solid rgba(92, 58, 24, 0.18);
@@ -243,5 +265,13 @@ const seo = pageSeo.en['/en/'];
 		width: 100%;
 		height: 100%;
 		border: 0;
+	}
+	@media (max-width: 760px) {
+		.bio-shell {
+			grid-template-columns: 1fr;
+		}
+		.bio-portrait {
+			max-width: 14rem;
+		}
 	}
 </style>
