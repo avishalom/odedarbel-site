@@ -45,21 +45,24 @@ const altHref = locale === 'he' ? currentPath.replace(/^\/?/, '/en/') : currentP
 </header>
 
 <script>
-	const navInner = document.querySelector('.nav-inner');
-	const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
-	const menu = document.getElementById('primary-menu');
-
 	function setMenuOpen(isOpen: boolean) {
+		const navInner = document.querySelector('.nav-inner');
+		const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
 		navInner?.classList.toggle('is-open', isOpen);
 		menuButton?.setAttribute('aria-expanded', String(isOpen));
 	}
 
-	menuButton?.addEventListener('click', () => {
-		setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true');
-	});
+	document.addEventListener('click', (event) => {
+		const target = event.target;
+		if (!(target instanceof Element)) return;
 
-	menu?.addEventListener('click', (event) => {
-		if (event.target instanceof HTMLAnchorElement) setMenuOpen(false);
+		const menuButton = target.closest<HTMLButtonElement>('.menu-toggle');
+		if (menuButton) {
+			setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true');
+			return;
+		}
+
+		if (target.closest('#primary-menu a')) setMenuOpen(false);
 	});
 
 	document.addEventListener('keydown', (event) => {
