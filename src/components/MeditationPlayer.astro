@@ -1,0 +1,157 @@
+---
+interface Props {
+	title: string;
+	category: string;
+	description: string;
+	duration: string;
+	src: string;
+	downloadLabel: string;
+	playLabel: string;
+	pauseLabel: string;
+}
+
+const { title, category, description, duration, src, downloadLabel, playLabel, pauseLabel } = Astro.props;
+---
+
+<meditation-player class="recording" data-play-label={playLabel} data-pause-label={pauseLabel}>
+	<div class="recording__meta">
+		<p class="recording__category">{category}</p>
+		<h2>{title} <span>{duration}</span></h2>
+		<p>{description}</p>
+	</div>
+	<audio preload="metadata" src={src}></audio>
+	<div class="player" role="group" aria-label={title}>
+		<button class="player__toggle" type="button" aria-label={playLabel}>
+			<svg class="player__icon player__icon--play" viewBox="0 0 24 24" aria-hidden="true">
+				<path d="M8 5v14l11-7z"></path>
+			</svg>
+			<svg class="player__icon player__icon--pause" viewBox="0 0 24 24" aria-hidden="true">
+				<path d="M7 5h4v14H7zM13 5h4v14h-4z"></path>
+			</svg>
+		</button>
+		<span class="player__time player__time--current">0:00</span>
+		<input class="player__seek" type="range" min="0" max="1000" value="0" step="1" aria-label={title} />
+		<span class="player__time player__time--duration">{duration}</span>
+		<a class="player__download" href={src} download>{downloadLabel}</a>
+	</div>
+</meditation-player>
+
+<style>
+	.recording {
+		display: block;
+		border-block-start: 1px solid var(--color-cream-dark);
+		padding-block-start: 1.25rem;
+	}
+
+	.recording__category {
+		color: var(--color-brown);
+		font-size: 0.9rem;
+		font-weight: 700;
+		margin-block-end: 0.35rem;
+	}
+
+	.recording h2 {
+		margin-block: 0 0.6rem;
+	}
+
+	.recording h2 span {
+		color: var(--color-brown);
+		font-family: var(--font-body);
+		font-size: 1rem;
+		font-weight: 500;
+	}
+
+	:lang(he) .recording h2 span {
+		font-family: var(--font-body-he);
+	}
+
+	.player {
+		align-items: center;
+		background: var(--color-white);
+		border: 1px solid rgba(92, 58, 24, 0.16);
+		border-radius: 0.75rem;
+		box-shadow: 0 0.5rem 1.5rem rgba(26, 43, 60, 0.08);
+		display: grid;
+		gap: 0.75rem;
+		grid-template-columns: 2.75rem auto 1fr auto auto;
+		inline-size: min(100%, 38rem);
+		margin-block-start: 0.85rem;
+		padding: 0.75rem;
+	}
+
+	.player__toggle {
+		align-items: center;
+		appearance: none;
+		background: var(--color-teal);
+		border: 0;
+		border-radius: 50%;
+		color: var(--color-white);
+		cursor: pointer;
+		display: inline-flex;
+		height: 2.75rem;
+		justify-content: center;
+		padding: 0;
+		width: 2.75rem;
+	}
+
+	.player__toggle:hover {
+		background: var(--color-teal-dark);
+	}
+
+	.player__icon {
+		fill: currentColor;
+		height: 1.1rem;
+		width: 1.1rem;
+	}
+
+	.player__icon--pause,
+	.recording.is-playing .player__icon--play {
+		display: none;
+	}
+
+	.recording.is-playing .player__icon--pause {
+		display: block;
+	}
+
+	.player__time {
+		color: var(--color-brown);
+		font-size: 0.9rem;
+		font-variant-numeric: tabular-nums;
+		min-inline-size: 3rem;
+		text-align: center;
+	}
+
+	.player__seek {
+		accent-color: var(--color-teal);
+		inline-size: 100%;
+		min-inline-size: 7rem;
+	}
+
+	.player__download {
+		color: var(--color-teal-dark);
+		font-size: 0.9rem;
+		font-weight: 600;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.player__download:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 34rem) {
+		.player {
+			grid-template-columns: 2.75rem 1fr auto;
+		}
+
+		.player__seek {
+			grid-column: 1 / -1;
+			grid-row: 2;
+		}
+
+		.player__download {
+			grid-column: 1 / -1;
+			justify-self: start;
+		}
+	}
+</style>

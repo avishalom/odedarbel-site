@@ -1,5 +1,6 @@
 ---
 import { getEntry, render } from 'astro:content';
+import MeditationPlayer from '../../components/MeditationPlayer.astro';
 import ProsePage from '../../components/ProsePage.astro';
 import { withBase } from '../../i18n';
 import { meditationLibraryHref, meditationLibraryTracks } from '../../meditationLibrary';
@@ -13,14 +14,16 @@ const { Content } = await render(entry);
 	<Content />
 	<div class="recording-list">
 		{meditationLibraryTracks.map((track) => (
-			<section class="recording" aria-labelledby={`${track.id}-title`}>
-				<p class="recording__category">{track.he.category}</p>
-				<h2 id={`${track.id}-title`}>{track.he.title} <span>{track.duration}</span></h2>
-				<p>{track.he.description}</p>
-				<audio controls preload="metadata" src={withBase(meditationLibraryHref(track.filename))}>
-					<a href={withBase(meditationLibraryHref(track.filename))} download={track.filename}>הורדת ההקלטה</a>
-				</audio>
-			</section>
+			<MeditationPlayer
+				title={track.he.title}
+				category={track.he.category}
+				description={track.he.description}
+				duration={track.duration}
+				src={withBase(meditationLibraryHref(track.filename))}
+				downloadLabel="הורדה"
+				playLabel={`נגן את ${track.he.title}`}
+				pauseLabel={`השהה את ${track.he.title}`}
+			/>
 		))}
 	</div>
 </ProsePage>
@@ -30,34 +33,5 @@ const { Content } = await render(entry);
 		display: grid;
 		gap: 1.5rem;
 		margin-block-start: 2rem;
-	}
-
-	.recording {
-		border-block-start: 1px solid var(--color-cream-dark);
-		padding-block-start: 1.25rem;
-	}
-
-	.recording__category {
-		color: var(--color-brown);
-		font-size: 0.9rem;
-		font-weight: 700;
-		margin-block-end: 0.35rem;
-	}
-
-	.recording h2 {
-		margin-block: 0 0.6rem;
-	}
-
-	.recording h2 span {
-		color: var(--color-brown);
-		font-family: var(--font-body-he);
-		font-size: 1rem;
-		font-weight: 500;
-	}
-
-	.recording audio {
-		display: block;
-		inline-size: min(100%, 34rem);
-		margin-block-start: 0.75rem;
 	}
 </style>

@@ -25,12 +25,14 @@ loader pages and `_gated` asset URLs are excluded from the generated sitemap by
 the sitemap filter in `astro.config.mjs`; the raw plaintext pages are removed
 from `dist` after encryption.
 
-The page content is rendered from `src/meditationLibrary.ts` into both raw gated
-routes:
+The page content is rendered from `src/meditationLibrary.ts` through
+`src/components/MeditationPlayer.astro` into both raw gated routes:
 
 - `src/pages/raw-content/meditationlibrary.astro`
 - `src/pages/raw-content/en/meditationlibrary.astro`
 
 The source MDX files now only contain the page introduction text; track metadata
 and audio links are centralized in the TypeScript helper so the Hebrew and
-English pages stay in sync.
+English pages stay in sync. The player JavaScript is registered by
+`PasswordGate.astro`, so the custom player upgrades after the encrypted content
+is unlocked.
