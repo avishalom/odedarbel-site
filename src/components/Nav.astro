@@ -7,7 +7,8 @@ interface Props {
 	currentPath: string;
 }
 const { locale, currentPath } = Astro.props;
-const items = nav[locale];
+const contactHref = locale === 'he' ? '/contact' : '/en/contact';
+const items = nav[locale].filter((item) => item.href !== contactHref);
 const t = uiStrings[locale];
 const altHref = locale === 'he' ? currentPath.replace(/^\/?/, '/en/') : currentPath.replace(/^\/en\/?/, '/');
 ---
@@ -26,9 +27,14 @@ const altHref = locale === 'he' ? currentPath.replace(/^\/?/, '/en/') : currentP
 				))}
 			</ul>
 		</nav>
-		<a class="lang-switch" href={withBase(altHref)} hreflang={altLangHref[locale]}>
-			{t.switchLang}
-		</a>
+		<div class="nav-actions">
+			<a class="lang-switch" href={withBase(altHref)} hreflang={altLangHref[locale]}>
+				{t.switchLang}
+			</a>
+			<a class="nav-cta" href={withBase(contactHref)} aria-current={currentPath === contactHref ? 'page' : undefined}>
+				{t.contactCta}
+			</a>
+		</div>
 	</div>
 </header>
 
@@ -76,6 +82,11 @@ const altHref = locale === 'he' ? currentPath.replace(/^\/?/, '/en/') : currentP
 		color: var(--color-teal-dark);
 		text-decoration: underline;
 	}
+	.nav-actions {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+	}
 	.lang-switch {
 		border: 1px solid var(--color-teal);
 		border-radius: var(--radius-pill);
@@ -88,5 +99,18 @@ const altHref = locale === 'he' ? currentPath.replace(/^\/?/, '/en/') : currentP
 	.lang-switch:hover {
 		background: var(--color-teal);
 		color: var(--color-white);
+	}
+	.nav-cta {
+		border-radius: var(--radius-pill);
+		padding: 0.5rem 1.25rem;
+		text-decoration: none;
+		background: var(--color-teal);
+		color: var(--color-white);
+		font-weight: 600;
+		font-size: 0.9rem;
+		white-space: nowrap;
+	}
+	.nav-cta:hover {
+		background: var(--color-teal-dark);
 	}
 </style>
