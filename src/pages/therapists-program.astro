@@ -1,5 +1,7 @@
 ---
 import ProsePage from '../components/ProsePage.astro';
+import PillButton from '../components/PillButton.astro';
+import { withBase } from '../i18n';
 import { pageSeo } from '../seo';
 const seo = pageSeo.he['/therapists-program'];
 ---
@@ -36,6 +38,11 @@ const seo = pageSeo.he['/therapists-program'];
 		<li>תכנית תלת-שנתית: 8,000 ש"ח לשנה</li>
 		<li>תכנית המשך לבוגרים: 4,500 ש"ח לשנה</li>
 	</ul>
+	<h2>ספריית התכנית</h2>
+	<p>חומרי הקריאה של התכנית זמינים למשתתפים בעמוד מוגן בסיסמה.</p>
+	<p>
+		<PillButton href={withBase('/therapistdoc')} variant="outline">לספריית תוכנית המטפלים</PillButton>
+	</p>
 	<h2>הרשמה</h2>
 	<p>הרשמה מתבצעת דרך טופס מקוון; מספר המקומות מוגבל.</p>
 </ProsePage>

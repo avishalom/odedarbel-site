@@ -51,8 +51,10 @@
       The sitemap excludes gated public routes, raw plaintext routes, and `_gated`
       asset URLs; the PDF download links are only rendered inside encrypted raw page
       content. Added `GATE_THERAPIST_LIBRARY` to `.env.example` and the deploy
-      workflow. CI still needs the matching GitHub Actions secret set to the known
-      password.
+      workflow, and set the matching GitHub Actions secret with `gh`.
+- [x] Link therapists program pages to the protected therapist library:
+      `/therapists-program` links to `/therapistdoc`, and
+      `/en/therapists-program` links to `/en/therapistdoc`.
 - [ ] Wire the contact form (`/contact`, `/en/contact`) to a real submission backend
       (e.g. Formspree, or a serverless function). Verified in code: both contact pages
       render `<form>` without an `action`, and each page still includes an in-page note

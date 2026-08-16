@@ -1,5 +1,7 @@
 ---
 import ProsePage from '../../components/ProsePage.astro';
+import PillButton from '../../components/PillButton.astro';
+import { withBase } from '../../i18n';
 import { pageSeo } from '../../seo';
 const seo = pageSeo.en['/en/therapists-program'];
 ---
@@ -39,6 +41,11 @@ const seo = pageSeo.en['/en/therapists-program'];
 		<li>Three-year program: 8,000 NIS per year</li>
 		<li>Graduate continuation program: 4,500 NIS per year</li>
 	</ul>
+	<h2>Program library</h2>
+	<p>The program reading materials are available to participants on a password-protected page.</p>
+	<p>
+		<PillButton href={withBase('/en/therapistdoc')} variant="outline">Go to the Therapists Program Library</PillButton>
+	</p>
 	<h2>Registration</h2>
 	<p>Registration is via an online form; enrollment is limited.</p>
 </ProsePage>
