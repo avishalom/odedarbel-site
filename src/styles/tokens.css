@@ -4,7 +4,8 @@
 	--color-teal-dark: #145c69;
 	--color-cream: #f2e8d5;
 	--color-cream-soft: #faf5ea;
-	--color-brown: #6b5940; /* darkened from #927F5D — passes WCAG AA (4.5:1+) for body text on cream/white */
+	--color-cream-dark: #e3d8c3; /* deeper cream for alternating section accents */
+	--color-brown: #5c3a18; /* warm amber-brown matching reference palette; passes WCAG AA (9:1+) on cream/white */
 	--color-navy: #1a2b3c;
 	--color-white: #ffffff;
 	--color-focus: #145c69;
@@ -49,7 +50,7 @@ html {
 
 body {
 	margin: 0;
-	background: var(--color-white);
+	background: var(--color-cream-soft);
 	color: var(--color-navy);
 	font-family: var(--font-body);
 	line-height: 1.6;
@@ -72,9 +73,10 @@ h1, h2, h3, h4 {
 	font-family: var(--font-display-he);
 }
 
-h3 {
-	color: var(--color-navy);
-}
+h1 { font-size: clamp(2rem, 4vw, 2.75rem); }
+h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+h3 { font-size: 1.2rem; color: var(--color-brown); }
+h4 { font-size: 1rem; }
 
 p {
 	color: var(--color-brown);
@@ -134,4 +136,8 @@ section {
 
 section.cream {
 	background: var(--color-cream);
+}
+
+section.cream-dark {
+	background: var(--color-cream-dark);
 }
