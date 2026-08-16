@@ -34,10 +34,13 @@
 
 - [ ] Point `odedarbel.com`'s DNS at GitHub Pages (A/ALIAS + `www` CNAME per GitHub's
       docs) to activate the `public/CNAME` file already in the repo.
-- [ ] Until DNS is switched, internal links are broken on the raw
-      `https://avishalom.github.io/odedarbel-site/` URL (links are root-relative,
-      built for the custom domain) — only the homepage works there. Use `npm run dev`
-      for an accurate local preview in the meantime.
+- [ ] **When DNS is switched**, remove `base: '/odedarbel-site'` from
+      `astro.config.mjs` and rebuild/redeploy — internal links use the `withBase()`
+      helper (`src/i18n.ts`) which reads Astro's `BASE_URL`, so removing `base` makes
+      every link resolve at the domain root automatically. No per-page changes needed.
+      (Previously all internal links only worked on the homepage of the GitHub Pages
+      subpath URL; fixed by adding `base` + routing every internal `href` through
+      `withBase()`.)
 
 ## Nice to have
 

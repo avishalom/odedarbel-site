@@ -1,6 +1,6 @@
 ---
 import type { Locale } from '../i18n';
-import { nav, altLangHref, uiStrings } from '../i18n';
+import { nav, altLangHref, uiStrings, withBase } from '../i18n';
 
 interface Props {
 	locale: Locale;
@@ -14,19 +14,19 @@ const altHref = locale === 'he' ? currentPath.replace(/^\/?/, '/en/') : currentP
 
 <header class="site-header">
 	<div class="container nav-inner">
-		<a class="brand" href={locale === 'he' ? '/' : '/en/'}>{t.siteName}</a>
+		<a class="brand" href={withBase(locale === 'he' ? '/' : '/en/')}>{t.siteName}</a>
 		<nav aria-label={locale === 'he' ? 'ניווט ראשי' : 'Main navigation'}>
 			<ul>
 				{items.map((item) => (
 					<li>
-						<a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
+						<a href={withBase(item.href)} aria-current={currentPath === item.href ? 'page' : undefined}>
 							{item.label}
 						</a>
 					</li>
 				))}
 			</ul>
 		</nav>
-		<a class="lang-switch" href={altHref} hreflang={altLangHref[locale]}>
+		<a class="lang-switch" href={withBase(altHref)} hreflang={altLangHref[locale]}>
 			{t.switchLang}
 		</a>
 	</div>

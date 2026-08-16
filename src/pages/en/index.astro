@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import FeatureTriad from '../../components/FeatureTriad.astro';
 import PillButton from '../../components/PillButton.astro';
+import { withBase } from '../../i18n';
 ---
 
 <BaseLayout
@@ -134,7 +135,7 @@ import PillButton from '../../components/PillButton.astro';
 				]}
 			/>
 			<p class="triad-cta">
-				<PillButton href="/en/psychadelicresearchandtherapy" variant="outline">Read more</PillButton>
+				<PillButton href={withBase("/en/psychadelicresearchandtherapy")} variant="outline">Read more</PillButton>
 			</p>
 		</div>
 	</section>
@@ -145,7 +146,7 @@ import PillButton from '../../components/PillButton.astro';
 			<p>Phone: 050-6576691</p>
 			<p>Email: <a href="mailto:oded.arbel@gmail.com">oded.arbel@gmail.com</a></p>
 			<p>Clinic: Moshav Tal Shahar</p>
-			<PillButton href="/en/contact">Contact</PillButton>
+			<PillButton href={withBase("/en/contact")}>Contact</PillButton>
 		</div>
 	</section>
 </BaseLayout>

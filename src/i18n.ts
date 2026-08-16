@@ -32,6 +32,18 @@ export const altLangHref: Record<Locale, string> = {
 	en: 'he',
 };
 
+/**
+ * Prefixes a root-relative path (e.g. "/tamar-amit") with Astro's configured
+ * base path, so internal links work both on the GitHub Pages subpath
+ * (astro.config.mjs `base`) and on the eventual odedarbel.com custom domain
+ * (once DNS is switched, drop `base` from the config and this still works —
+ * BASE_URL becomes "/").
+ */
+export const withBase = (path: string): string => {
+	const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+	return path === '/' ? base : `${base}${path.replace(/^\//, '')}`;
+};
+
 export const uiStrings = {
 	he: {
 		skipToContent: 'דלג לתוכן',

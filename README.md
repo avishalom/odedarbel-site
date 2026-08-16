@@ -46,8 +46,9 @@ at `/en/`).
   worth a native-speaker review before publishing.
 - **Deploy**: GitHub Actions workflow (`.github/workflows/deploy.yml`) builds and
   deploys to GitHub Pages on push to `main`; Pages is enabled with "GitHub Actions" as
-  the source. All links in the site are root-relative (e.g. `/tamar-amit`), which is
-  correct once `odedarbel.com` DNS is pointed at GitHub Pages (a `public/CNAME` file is
-  already set up for that). Until the DNS switch happens, the raw
-  `https://avishalom.github.io/odedarbel-site/` URL will have broken internal links —
-  use `npm run dev` / `npm run preview` for an accurate local preview in the meantime.
+  the source. `astro.config.mjs` sets `base: '/odedarbel-site'` and every internal link
+  goes through the `withBase()` helper (`src/i18n.ts`), so links resolve correctly on
+  the interim `https://avishalom.github.io/odedarbel-site/` URL. A `public/CNAME` file
+  is already set up for `odedarbel.com`; once DNS is pointed there, remove the `base`
+  line from `astro.config.mjs` and rebuild/redeploy — `withBase()` will then resolve
+  links at the domain root with no other changes needed.

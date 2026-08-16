@@ -53,10 +53,13 @@ pins `node-version: 22` for this reason; do not downgrade it).
   meditation recordings library section.
 - **Deploy**: `.github/workflows/deploy.yml` builds and deploys to GitHub Pages via
   GitHub Actions (not the legacy `gh-pages` branch method) on every push to `main`.
-  `public/CNAME` points at `odedarbel.com` for when DNS is switched over; until then
-  the live GitHub Pages URL is `https://avishalom.github.io/odedarbel-site/`, where
-  internal links break because they're root-relative (built for the custom domain
-  serving from `/`, not the `/odedarbel-site/` subpath).
+  `astro.config.mjs` sets `base: '/odedarbel-site'` and every internal `href` is routed
+  through the `withBase()` helper (`src/i18n.ts`) instead of being hardcoded
+  root-relative, so links resolve correctly on the interim GitHub Pages URL
+  (`https://avishalom.github.io/odedarbel-site/`). `public/CNAME` points at
+  `odedarbel.com` for when DNS is switched over — at that point, remove `base` from
+  `astro.config.mjs` and rebuild; `withBase()` will resolve links at the domain root
+  automatically, no per-page edits needed.
 
 ## TODO.md
 
