@@ -22,10 +22,11 @@
       active research.
 - [ ] **Native-speaker review of the English pages** (`src/pages/en/`) — currently a
       first-pass translation of the Hebrew content, not professionally checked.
-- [ ] **Verify homepage bio wording**: double-check the "personal note" and "read more"
-      bio text in `src/pages/index.astro` against the live site. These were
-      reconstructed via an AI page-content summarizer, so exact wording should be
-      verified rather than trusted verbatim. Publications and video/audio are verified.
+- [x] **Verify homepage bio wording**: compared the "personal note" and "read more"
+      bio text in `src/pages/index.astro` against the live odedarbel.com homepage.
+      The "read more" bio text was already aligned; replaced the summarized personal
+      note with the live Hebrew wording and updated the English translation.
+      Publications and video/audio are verified.
 
 ## Content
 
