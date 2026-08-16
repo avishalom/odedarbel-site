@@ -1,14 +1,25 @@
-# Therapists program library — downloading off Wix (in progress)
+# Therapists program library — downloaded and wired
 
 Goal: download all 30 PDFs from the old Wix site's password-protected
 "ספריית תוכנית המטפלים" (therapists program library) at
 `https://www.odedarbel.com/therapistdoc`, store them in this repo via
-**git LFS**, and eventually serve them from the new site (using the same
-password-gate mechanism as the meditation library — see
+**git LFS**, and serve them from the new site (using the same password-gate
+mechanism as the meditation library — see
 `docs/password-gate.md`) instead of linking out to Wix. This is part of
 moving fully off Wix hosting.
 
-## Status: blocked partway through — resume here
+## Status: complete
+
+The 30 PDFs are now in `gated-assets/therapist-library/`, and the new site has
+password-gated routes at `/therapistdoc` and `/en/therapistdoc`. During
+`astro build`, `scripts/gated-pages.integration.mjs` encrypts the raw page
+content, removes `dist/raw-content`, and copies the PDFs into
+`dist/_gated/therapist-library/`.
+
+The sitemap filter in `astro.config.mjs` excludes gated public routes, raw
+plaintext routes, and `_gated` asset URLs. The PDF download links are only
+rendered inside encrypted raw page content, not on public pages or in the
+sitemap.
 
 ### Done
 
@@ -41,7 +52,7 @@ moving fully off Wix hosting.
   - `8 Principles Of Hakomi.pdf` → raw hash `44d76c_8852f37b486c491eadf1c2a82a34fc59.pdf`
   - `100 Years Of Pt. Hillman.pdf` → raw hash `44d76c_192584134ffc44bcaa5180bf5f1059e0.pdf`
 
-### Blocked / next step
+### Historical blocked note
 
 Tried to skip the UI entirely by POSTing directly to
 `/api/v1/file-sharing/library-items/download` with guessed body shapes
@@ -54,7 +65,7 @@ the real request when the UI's "⋮ → הורדה" is clicked, to learn the cor
 body shape and replicate it in a loop over all 30 items instead of clicking
 through the UI 30 times.
 
-**Next session should:**
+**Original next-session plan, now obsolete:**
 
 1. Navigate to `https://www.odedarbel.com/therapistdoc`, log in with
    `Mindthegap` (the password field needs a JS-dispatched `input` event to
@@ -75,8 +86,7 @@ through the UI 30 times.
    commit the 30 PDFs via LFS.
 6. Only after that: wire them into the site as a gated page (new content
    collection entries / raw+loader pages under the `docs/password-gate.md`
-   pattern, listing each PDF with a download link) — this part hasn't been
-   started at all yet.
+   pattern, listing each PDF with a download link).
 
 ### Login snippet (password field needs a real `input` event)
 

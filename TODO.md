@@ -45,15 +45,15 @@
 
 ## Functionality
 
-- [ ] **Therapists program library page** — no `/therapistdoc` or
-      `/en/therapistdoc` routes exist yet, and `scripts/gated-pages.config.mjs` only
-      includes the meditation library routes. The 30 PDFs are already in the repo under
-      `gated-assets/therapist-library/` (committed via git LFS in 5a98b61). Build a
-      password-gated page listing all 30 files with download links, using the same
-      `PasswordGate.astro` + `scripts/encrypt-gated.mjs` pattern as the meditation
-      library (see `docs/password-gate.md`). The password is known: `Mindthegap`.
-      Remember to add the new gate env var to `.env.example` and
-      `.github/workflows/deploy.yml`.
+- [x] **Therapists program library page** (`/therapistdoc`, `/en/therapistdoc`):
+      rebuilt as a password-gated page listing all 30 PDFs under
+      `gated-assets/therapist-library/`. Gated page encryption and asset copying now
+      run from the Astro build integration (`scripts/gated-pages.integration.mjs`).
+      The sitemap excludes gated public routes, raw plaintext routes, and `_gated`
+      asset URLs; the PDF download links are only rendered inside encrypted raw page
+      content. Added `GATE_THERAPIST_LIBRARY` to `.env.example` and the deploy
+      workflow. CI still needs the matching GitHub Actions secret set to the known
+      password.
 - [ ] Wire the contact form (`/contact`, `/en/contact`) to a real submission backend
       (e.g. Formspree, or a serverless function). Verified in code: both contact pages
       render `<form>` without an `action`, and each page still includes an in-page note
@@ -73,7 +73,8 @@
 
 ## Nice to have
 
-- [ ] Nav wraps awkwardly on narrower viewports (~900–1100px) — could use a proper
-      mobile menu instead of wrapping to a second line.
+- [x] Nav wraps awkwardly on narrower viewports (~900–1100px): replaced the wrapping
+      header with a responsive menu. Verified collapsed/open mobile behavior at 390px,
+      menu behavior at 1300px, and a single-row English desktop header at 1366px.
 - [ ] No images from the original site were migrated in (bio photo, section photos) —
       only text content was scraped. Source and add these.

@@ -2,6 +2,10 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { gatedPages } from './scripts/gated-pages.config.mjs';
+import { gatedPagesIntegration } from './scripts/gated-pages.integration.mjs';
+
+const gatedRouteFragments = gatedPages.flatMap(({ raw, loader }) => [`/${raw}`, `/${loader}`]);
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,9 +23,12 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      // Exclude password-protected pages and internal content paths
+      // Exclude password-protected pages, raw plaintext routes, and gated asset URLs.
       filter: (page) =>
-        !page.includes('meditationlibrary') && !page.includes('/raw-content/'),
+        !gatedRouteFragments.some((route) => page.includes(route)) &&
+        !page.includes('/raw-content/') &&
+        !page.includes('/_gated/'),
     }),
+    gatedPagesIntegration(),
   ],
 });

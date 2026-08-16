@@ -51,6 +51,7 @@ export const uiStrings = {
 		switchLang: 'English',
 		contactCta: 'צרו קשר',
 		readMore: 'קראו עוד',
+		menu: 'תפריט',
 	},
 	en: {
 		skipToContent: 'Skip to content',
@@ -58,5 +59,6 @@ export const uiStrings = {
 		switchLang: 'עברית',
 		contactCta: 'Contact',
 		readMore: 'Read more',
+		menu: 'Menu',
 	},
 };

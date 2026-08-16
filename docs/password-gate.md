@@ -1,8 +1,9 @@
 # Password-gated pages
 
-Some pages (currently the meditation recordings library) need a soft password
-gate — enough to keep casual visitors out, not real access control. There's no
-backend, so gating happens entirely client-side at build time:
+Some pages (currently the meditation recordings library and Therapists Program
+library) need a soft password gate — enough to keep casual visitors out, not
+real access control. There's no backend, so gating happens entirely client-side
+at build time:
 
 1. **Source content** lives in `src/content/gated/<locale>/<slug>.mdx` — a
    normal MDX content collection entry (see `src/content.config.ts`), editable
@@ -13,12 +14,18 @@ backend, so gating happens entirely client-side at build time:
 3. **Loader page** — the real public route (e.g. `src/pages/meditationlibrary.astro`)
    renders `<PasswordGate />`: a password field plus a hidden payload
    placeholder (`__GATE_IV__` / `__GATE_CIPHER__`).
-4. **Postbuild step** (`scripts/encrypt-gated.mjs`, run via `npm run build`)
+4. **Astro build integration** (`scripts/gated-pages.integration.mjs`, registered
+   in `astro.config.mjs`)
    reads each raw page's rendered `<body>`, encrypts it (AES-256-GCM, key =
    SHA-256 of the plain password, via Node's `crypto`), writes the ciphertext
    into the loader page's placeholders, and deletes the raw page's output so
    the plaintext never ships in `dist/`.
-5. **Client-side**: `PasswordGate.astro`'s script derives the same AES key
+5. **Gated assets** for encrypted pages live outside `public/` under
+   `gated-assets/`. The same integration copies configured asset folders into
+   `dist/_gated/` after page generation. Links to these files should only appear
+   inside encrypted page content, and `astro.config.mjs` excludes gated routes,
+   raw routes, and `_gated` URLs from the sitemap.
+6. **Client-side**: `PasswordGate.astro`'s script derives the same AES key
    from whatever the visitor types (SHA-256 → `SubtleCrypto`), tries to
    decrypt, and on success replaces `document.body.innerHTML` with the
    decrypted content — no page reload, no server round-trip.
@@ -39,8 +46,7 @@ Passwords are **not** committed to the repo. They come from environment
 variables, one per gated page (see `scripts/gated-pages.config.mjs`):
 
 - **Local dev/build**: copy `.env.example` to `.env` (gitignored) and fill in
-  real values. `npm run build` picks it up automatically via Node's
-  `--env-file-if-exists`.
+  real values. The Astro build integration reads `.env` automatically.
 - **CI/deploy**: set as a GitHub Actions repo secret with the same name, and
   reference it in `.github/workflows/deploy.yml`'s build step `env:` block.
 
@@ -52,5 +58,8 @@ variables, one per gated page (see `scripts/gated-pages.config.mjs`):
 3. Add a loader page using `<PasswordGate locale={...} />`.
 4. Add an entry to `scripts/gated-pages.config.mjs` with a new `passwordEnv`
    name.
-5. Add that env var to `.env.example` and to the deploy workflow's `env:`
+5. If the page has downloadable assets, keep them under `gated-assets/`, add
+   the directory to `gatedAssetDirectories`, and make sure asset links are only
+   rendered by the raw encrypted page.
+6. Add that env var to `.env.example` and to the deploy workflow's `env:`
    block, and set the matching GitHub Actions secret (`gh secret set <NAME>`).

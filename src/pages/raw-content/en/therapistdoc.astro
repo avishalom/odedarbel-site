@@ -1,0 +1,36 @@
+---
+import { getEntry, render } from 'astro:content';
+import ProsePage from '../../../components/ProsePage.astro';
+import { therapistLibraryFiles, therapistLibraryHref } from '../../../therapistLibrary';
+import { withBase } from '../../../i18n';
+
+const entry = await getEntry('gated', 'en/therapist-library');
+if (!entry) throw new Error('therapist-library.en entry not found');
+const { Content } = await render(entry);
+---
+
+<ProsePage locale="en" currentPath="/en/therapistdoc" title={entry.data.title} description={entry.data.description}>
+	<Content />
+	<h2>Downloads</h2>
+	<ul class="document-list">
+		{therapistLibraryFiles.map((filename) => (
+			<li>
+				<a href={withBase(therapistLibraryHref(filename))} download={filename}>
+					{filename.replace(/\.pdf$/i, '')}
+				</a>
+			</li>
+		))}
+	</ul>
+</ProsePage>
+
+<style>
+	.document-list {
+		display: grid;
+		gap: 0.6rem;
+		padding-inline-start: 1.25rem;
+	}
+
+	.document-list a {
+		overflow-wrap: anywhere;
+	}
+</style>

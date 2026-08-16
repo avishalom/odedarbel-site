@@ -16,39 +16,74 @@ const altHref = locale === 'he' ? currentPath.replace(/^\/?/, '/en/') : currentP
 <header class="site-header">
 	<div class="container nav-inner">
 		<a class="brand" href={withBase(locale === 'he' ? '/' : '/en/')}>{t.siteName}</a>
-		<nav aria-label={locale === 'he' ? 'ניווט ראשי' : 'Main navigation'}>
-			<ul>
-				{items.map((item) => (
-					<li>
-						<a href={withBase(item.href)} aria-current={currentPath === item.href ? 'page' : undefined}>
-							{item.label}
-						</a>
-					</li>
-				))}
-			</ul>
-		</nav>
-		<div class="nav-actions">
-			<a class="lang-switch" href={withBase(altHref)} hreflang={altLangHref[locale]}>
-				{t.switchLang}
-			</a>
-			<a class="nav-cta" href={withBase(contactHref)} aria-current={currentPath === contactHref ? 'page' : undefined}>
-				{t.contactCta}
-			</a>
+		<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+			<span class="menu-icon" aria-hidden="true"></span>
+			<span>{t.menu}</span>
+		</button>
+		<div class="nav-menu" id="primary-menu">
+			<nav aria-label={locale === 'he' ? 'ניווט ראשי' : 'Main navigation'}>
+				<ul>
+					{items.map((item) => (
+						<li>
+							<a href={withBase(item.href)} aria-current={currentPath === item.href ? 'page' : undefined}>
+								{item.label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+			<div class="nav-actions">
+				<a class="lang-switch" href={withBase(altHref)} hreflang={altLangHref[locale]}>
+					{t.switchLang}
+				</a>
+				<a class="nav-cta" href={withBase(contactHref)} aria-current={currentPath === contactHref ? 'page' : undefined}>
+					{t.contactCta}
+				</a>
+			</div>
 		</div>
 	</div>
 </header>
+
+<script>
+	const navInner = document.querySelector('.nav-inner');
+	const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
+	const menu = document.getElementById('primary-menu');
+
+	function setMenuOpen(isOpen: boolean) {
+		navInner?.classList.toggle('is-open', isOpen);
+		menuButton?.setAttribute('aria-expanded', String(isOpen));
+	}
+
+	menuButton?.addEventListener('click', () => {
+		setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true');
+	});
+
+	menu?.addEventListener('click', (event) => {
+		if (event.target instanceof HTMLAnchorElement) setMenuOpen(false);
+	});
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') setMenuOpen(false);
+	});
+
+	window.addEventListener('resize', () => {
+		if (window.matchMedia('(min-width: 1321px)').matches) setMenuOpen(false);
+	});
+</script>
 
 <style>
 	.site-header {
 		background: var(--color-cream-soft);
 		border-bottom: 1px solid rgba(92, 58, 24, 0.15);
+		position: relative;
+		z-index: 20;
 	}
 	.nav-inner {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		flex-wrap: wrap;
 		gap: var(--space-2);
+		max-width: 82rem;
 		padding-block: var(--space-2);
 	}
 	.brand {
@@ -57,15 +92,21 @@ const altHref = locale === 'he' ? currentPath.replace(/^\/?/, '/en/') : currentP
 		font-size: 1.4rem;
 		color: var(--color-teal-dark);
 		text-decoration: none;
+		white-space: nowrap;
 	}
 	:lang(he) .brand {
 		font-family: var(--font-display-he);
 	}
+	.nav-menu {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+	}
 	nav ul {
 		list-style: none;
 		display: flex;
-		flex-wrap: wrap;
-		gap: var(--space-3);
+		align-items: center;
+		gap: clamp(0.6rem, 1vw, var(--space-2));
 		margin: 0;
 		padding: 0;
 	}
@@ -73,6 +114,8 @@ const altHref = locale === 'he' ? currentPath.replace(/^\/?/, '/en/') : currentP
 		color: var(--color-teal);
 		text-decoration: none;
 		font-weight: 500;
+		font-size: 0.95rem;
+		white-space: nowrap;
 	}
 	nav a:hover {
 		color: var(--color-teal-dark);
@@ -112,5 +155,111 @@ const altHref = locale === 'he' ? currentPath.replace(/^\/?/, '/en/') : currentP
 	}
 	.nav-cta:hover {
 		background: var(--color-teal-dark);
+	}
+	.menu-toggle {
+		display: none;
+		align-items: center;
+		gap: 0.6rem;
+		border: 1px solid rgba(28, 125, 142, 0.55);
+		border-radius: var(--radius-pill);
+		background: transparent;
+		color: var(--color-teal-dark);
+		font: inherit;
+		font-weight: 600;
+		padding: 0.45rem 0.8rem;
+		cursor: pointer;
+	}
+	.menu-icon,
+	.menu-icon::before,
+	.menu-icon::after {
+		display: block;
+		width: 1.05rem;
+		height: 2px;
+		border-radius: 999px;
+		background: currentColor;
+		content: '';
+		transition: transform 0.15s ease, opacity 0.15s ease;
+	}
+	.menu-icon {
+		position: relative;
+	}
+	.menu-icon::before,
+	.menu-icon::after {
+		position: absolute;
+		inset-inline-start: 0;
+	}
+	.menu-icon::before {
+		transform: translateY(-0.35rem);
+	}
+	.menu-icon::after {
+		transform: translateY(0.35rem);
+	}
+	.is-open .menu-icon {
+		background: transparent;
+	}
+	.is-open .menu-icon::before {
+		transform: rotate(45deg);
+	}
+	.is-open .menu-icon::after {
+		transform: rotate(-45deg);
+	}
+
+	@media (max-width: 1320px) {
+		.nav-inner {
+			flex-wrap: wrap;
+		}
+		.menu-toggle {
+			display: inline-flex;
+		}
+		.nav-menu {
+			display: none;
+			flex-basis: 100%;
+			border-top: 1px solid transparent;
+		}
+		.is-open .nav-menu {
+			display: block;
+			border-top-color: rgba(92, 58, 24, 0.15);
+			padding-top: var(--space-2);
+		}
+		.is-open .nav-menu .nav-actions {
+			display: flex;
+			margin-top: var(--space-2);
+		}
+		nav ul {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0.35rem var(--space-2);
+		}
+		nav a {
+			display: block;
+			padding-block: 0.35rem;
+			white-space: normal;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.brand {
+			font-size: 1.2rem;
+		}
+		nav ul {
+			grid-template-columns: 1fr;
+		}
+		.nav-actions {
+			align-items: stretch;
+			flex-direction: column;
+			width: 100%;
+		}
+		.lang-switch,
+		.nav-cta {
+			text-align: center;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.menu-icon,
+		.menu-icon::before,
+		.menu-icon::after {
+			transition: none;
+		}
 	}
 </style>

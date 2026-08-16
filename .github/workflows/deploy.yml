@@ -26,6 +26,7 @@ jobs:
       - run: npm run build
         env:
           GATE_MEDITATION_LIBRARY: ${{ secrets.GATE_MEDITATION_LIBRARY }}
+          GATE_THERAPIST_LIBRARY: ${{ secrets.GATE_THERAPIST_LIBRARY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist

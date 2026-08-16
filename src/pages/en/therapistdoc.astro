@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PasswordGate from '../../components/PasswordGate.astro';
+import { pageSeo } from '../../seo';
+const seo = pageSeo.en['/en/therapistdoc'];
+---
+
+<BaseLayout locale="en" currentPath="/en/therapistdoc" title={seo.title} description={seo.description} noindex={seo.noindex}>
+	<PasswordGate locale="en" />
+</BaseLayout>

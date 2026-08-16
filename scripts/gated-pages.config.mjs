@@ -13,4 +13,17 @@
 export const gatedPages = [
 	{ raw: 'raw-content/meditationlibrary', loader: 'meditationlibrary', passwordEnv: 'GATE_MEDITATION_LIBRARY' },
 	{ raw: 'raw-content/en/meditationlibrary', loader: 'en/meditationlibrary', passwordEnv: 'GATE_MEDITATION_LIBRARY' },
+	{ raw: 'raw-content/therapistdoc', loader: 'therapistdoc', passwordEnv: 'GATE_THERAPIST_LIBRARY' },
+	{ raw: 'raw-content/en/therapistdoc', loader: 'en/therapistdoc', passwordEnv: 'GATE_THERAPIST_LIBRARY' },
+];
+
+// Asset files for gated pages live outside public/ so Astro does not publish
+// or sitemap them as normal site assets. The Astro build integration copies
+// them into dist after page encryption; links to these files should only appear
+// inside encrypted gated content.
+export const gatedAssetDirectories = [
+	{
+		source: 'gated-assets/therapist-library',
+		output: '_gated/therapist-library',
+	},
 ];

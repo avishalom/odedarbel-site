@@ -31,6 +31,11 @@ export const pageSeo: Record<'he' | 'en', Record<string, PageSeoEntry>> = {
 			description: 'ספריית הקלטות מדיטציה מודרכת — גישה מוגנת בסיסמה.',
 			noindex: true,
 		},
+		'/therapistdoc': {
+			title: 'ספריית תוכנית המטפלים',
+			description: 'חומרי קריאה לתוכנית המטפלים — גישה מוגנת בסיסמה.',
+			noindex: true,
+		},
 		'/psychadelicresearchandtherapy': {
 			title: 'טיפול ומחקר פסיכדלי',
 			description: 'ראש היחידה לטיפול ומחקר פסיכדלי במרכז לבריאות הנפש באר שבע.',
@@ -69,6 +74,11 @@ export const pageSeo: Record<'he' | 'en', Record<string, PageSeoEntry>> = {
 		'/en/meditationlibrary': {
 			title: 'Meditation Recordings Library',
 			description: 'Guided meditation recordings library — password protected.',
+			noindex: true,
+		},
+		'/en/therapistdoc': {
+			title: 'Therapists Program Library',
+			description: 'Therapists Program reading materials — password protected.',
 			noindex: true,
 		},
 		'/en/psychadelicresearchandtherapy': {
