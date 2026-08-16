@@ -45,5 +45,9 @@ at `/en/`).
 - **Translations**: English pages are a first-pass translation of the Hebrew content —
   worth a native-speaker review before publishing.
 - **Deploy**: GitHub Actions workflow (`.github/workflows/deploy.yml`) builds and
-  deploys to GitHub Pages on push to `main`. Enable GitHub Pages ("GitHub Actions" as
-  the source) in the repo settings after the first push.
+  deploys to GitHub Pages on push to `main`; Pages is enabled with "GitHub Actions" as
+  the source. All links in the site are root-relative (e.g. `/tamar-amit`), which is
+  correct once `odedarbel.com` DNS is pointed at GitHub Pages (a `public/CNAME` file is
+  already set up for that). Until the DNS switch happens, the raw
+  `https://avishalom.github.io/odedarbel-site/` URL will have broken internal links —
+  use `npm run dev` / `npm run preview` for an accurate local preview in the meantime.
