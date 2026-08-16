@@ -32,7 +32,7 @@ function makeCard(ogTitle: string, siteName: string, isHe: boolean): object {
 					type: 'div',
 					props: {
 						style: {
-							color: '#8ea4b8',
+							color: '#c4a882',
 							fontSize: 28,
 							fontFamily,
 							marginTop: 12,
