@@ -1,13 +1,10 @@
 ---
 import ProsePage from '../../components/ProsePage.astro';
+import { pageSeo } from '../../seo';
+const seo = pageSeo.en['/en/beershevacenter'];
 ---
 
-<ProsePage
-	locale="en"
-	currentPath="/en/beershevacenter"
-	title="Beer Sheva Mental Health Center — Mindfulness Clinic"
-	description="The mindfulness clinic at Beer Sheva Mental Health Center — groups, treatments, and areas of focus."
->
+<ProsePage locale="en" currentPath="/en/beershevacenter" title={seo.title} description={seo.description}>
 	<p>
 		Mindfulness-based treatments are increasingly popular for a wide range of psychological and
 		physical conditions.

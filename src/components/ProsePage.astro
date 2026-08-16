@@ -7,11 +7,12 @@ interface Props {
 	currentPath: string;
 	title: string;
 	description: string;
+	noindex?: boolean;
 }
-const { locale, currentPath, title, description } = Astro.props;
+const { locale, currentPath, title, description, noindex } = Astro.props;
 ---
 
-<BaseLayout locale={locale} currentPath={currentPath} title={title} description={description}>
+<BaseLayout locale={locale} currentPath={currentPath} title={title} description={description} noindex={noindex}>
 	<section>
 		<div class="container prose">
 			<h1>{title}</h1>

@@ -1,13 +1,10 @@
 ---
 import ProsePage from '../../components/ProsePage.astro';
+import { pageSeo } from '../../seo';
+const seo = pageSeo.en['/en/tamar-amit'];
 ---
 
-<ProsePage
-	locale="en"
-	currentPath="/en/tamar-amit"
-	title="Tamar Amit"
-	description="Tamar Amit — clinical psychologist, senior teaching partner of the Therapists Program."
->
+<ProsePage locale="en" currentPath="/en/tamar-amit" title={seo.title} description={seo.description}>
 	<p>
 		Senior partner in the teaching team of the Therapists Program. Clinical psychologist, graduate
 		of Ben-Gurion and Reichman Universities, and graduate of the psychedelic psychotherapy program.

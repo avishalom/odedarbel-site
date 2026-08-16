@@ -1,13 +1,10 @@
 ---
 import ProsePage from '../../components/ProsePage.astro';
+import { pageSeo } from '../../seo';
+const seo = pageSeo.en['/en/psychadelicresearchandtherapy'];
 ---
 
-<ProsePage
-	locale="en"
-	currentPath="/en/psychadelicresearchandtherapy"
-	title="Psychedelic Research and Therapy"
-	description="Head of the Psychedelic Treatment and Research Unit at Beer Sheva Mental Health Center."
->
+<ProsePage locale="en" currentPath="/en/psychadelicresearchandtherapy" title={seo.title} description={seo.description}>
 	<p>
 		Head of the Psychedelic Treatment and Research Unit at Beer Sheva Mental Health Center, and
 		co-founder of the psychedelic psychotherapy program.

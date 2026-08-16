@@ -2,14 +2,11 @@
 import ProsePage from '../components/ProsePage.astro';
 import PillButton from '../components/PillButton.astro';
 import { withBase } from '../i18n';
+import { pageSeo } from '../seo';
+const seo = pageSeo.he['/meditationpractice'];
 ---
 
-<ProsePage
-	locale="he"
-	currentPath="/meditationpractice"
-	title="תירגול מדיטציה"
-	description="תירגול מדיטציה — קבוצות, ספריית הקלטות מודרכות, וגישה בודהיסטית לנוכחות."
->
+<ProsePage locale="he" currentPath="/meditationpractice" title={seo.title} description={seo.description}>
 	<p>מזה אלפי שנים, במגוון מסורות רוחניות, ישבו אנשים לשהייה פשוטה ונוכחת ברגע הזה.</p>
 	<p>
 		מדיטציה היא תירגול פשוט, למרות שלא תמיד קל — התחייבות לשבת לפרק זמן קבוע ולהתבונן ללא שיפוט

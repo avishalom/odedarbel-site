@@ -1,13 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { pageSeo } from '../seo';
+const seo = pageSeo.he['/contact'];
 ---
 
-<BaseLayout
-	locale="he"
-	currentPath="/contact"
-	title="צרו קשר"
-	description="יצירת קשר עם ד&quot;ר עודד ארבל."
->
+<BaseLayout locale="he" currentPath="/contact" title={seo.title} description={seo.description}>
 	<section>
 		<div class="container prose">
 			<h1>צרו קשר</h1>

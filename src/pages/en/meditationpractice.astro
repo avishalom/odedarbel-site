@@ -2,14 +2,11 @@
 import ProsePage from '../../components/ProsePage.astro';
 import PillButton from '../../components/PillButton.astro';
 import { withBase } from '../../i18n';
+import { pageSeo } from '../../seo';
+const seo = pageSeo.en['/en/meditationpractice'];
 ---
 
-<ProsePage
-	locale="en"
-	currentPath="/en/meditationpractice"
-	title="Meditation Practice"
-	description="Meditation practice — groups, a library of guided recordings, and a Buddhist approach to presence."
->
+<ProsePage locale="en" currentPath="/en/meditationpractice" title={seo.title} description={seo.description}>
 	<p>For thousands of years, across many spiritual traditions, people have sat in simple, present-moment awareness.</p>
 	<p>
 		Meditation is a simple practice, though not always an easy one — a commitment to sit for a set

@@ -1,4 +1,5 @@
 ---
+import { SEO } from 'astro-seo';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { dir, uiStrings, type Locale } from '../i18n';
@@ -9,10 +10,28 @@ interface Props {
 	title: string;
 	description: string;
 	currentPath: string;
+	ogImage?: string;
+	noindex?: boolean;
 }
-const { locale, title, description, currentPath } = Astro.props;
+const { locale, title, description, currentPath, ogImage, noindex } = Astro.props;
 const t = uiStrings[locale];
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const siteOrigin = (Astro.site ?? new URL('https://odedarbel.com')).origin;
+const canonicalUrl = `${siteOrigin}${currentPath}`;
+
+const alternatePath =
+	locale === 'he'
+		? `/en${currentPath}`
+		: currentPath.replace(/^\/en/, '') || '/';
+const alternateLocale: Locale = locale === 'he' ? 'en' : 'he';
+const alternateUrl = `${siteOrigin}${alternatePath}`;
+
+// Derive slug for OG image: strip /en/ prefix, strip slashes, default to 'home'
+const pathSlug =
+	currentPath.replace(/^\/en\//, '').replace(/^\/en$/, '').replace(/^\//, '').replace(/\/$/, '') ||
+	'home';
+const resolvedOgImage = ogImage ?? `${siteOrigin}/og/${locale}-${pathSlug}.png`;
 ---
 
 <!doctype html>
@@ -20,11 +39,47 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="description" content={description} />
+		<SEO
+			title={title}
+			titleTemplate={`%s | ${t.siteName}`}
+			description={description}
+			canonical={canonicalUrl}
+			noindex={noindex}
+			openGraph={{
+				basic: {
+					title: title,
+					type: 'website',
+					image: resolvedOgImage,
+					url: canonicalUrl,
+				},
+				optional: {
+					description: description,
+					locale: locale === 'he' ? 'he_IL' : 'en_US',
+					siteName: t.siteName,
+				},
+				image: {
+					width: 1200,
+					height: 630,
+					alt: title,
+				},
+			}}
+			twitter={{
+				card: 'summary_large_image',
+				title: title,
+				description: description,
+				image: resolvedOgImage,
+			}}
+			extend={{
+				link: [
+					{ rel: 'alternate', hreflang: locale, href: canonicalUrl },
+					{ rel: 'alternate', hreflang: alternateLocale, href: alternateUrl },
+					{ rel: 'alternate', hreflang: 'x-default', href: `${siteOrigin}/` },
+				],
+			}}
+		/>
 		<link rel="icon" type="image/png" sizes="32x32" href={`${base}favicon.png`} />
 		<link rel="icon" type="image/png" sizes="192x192" href={`${base}favicon-192.png`} />
 		<link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
-		<title>{title} | {t.siteName}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link

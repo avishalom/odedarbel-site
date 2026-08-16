@@ -1,13 +1,10 @@
 ---
 import ProsePage from '../../components/ProsePage.astro';
+import { pageSeo } from '../../seo';
+const seo = pageSeo.en['/en/therapists-program'];
 ---
 
-<ProsePage
-	locale="en"
-	currentPath="/en/therapists-program"
-	title="Therapists Program"
-	description="A three-year therapist training program at the Desert Mindfulness Center."
->
+<ProsePage locale="en" currentPath="/en/therapists-program" title={seo.title} description={seo.description}>
 	<p>
 		A three-year therapist training program run by the Desert Mindfulness Center, active since
 		2011. The curriculum combines Buddhist-inspired experiential psychotherapy with theoretical

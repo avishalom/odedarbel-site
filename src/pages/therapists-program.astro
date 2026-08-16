@@ -1,13 +1,10 @@
 ---
 import ProsePage from '../components/ProsePage.astro';
+import { pageSeo } from '../seo';
+const seo = pageSeo.he['/therapists-program'];
 ---
 
-<ProsePage
-	locale="he"
-	currentPath="/therapists-program"
-	title="תוכנית המטפלים"
-	description="תוכנית הכשרת מטפלים תלת-שנתית של מרכז המדבר למיינדפולנס."
->
+<ProsePage locale="he" currentPath="/therapists-program" title={seo.title} description={seo.description}>
 	<p>
 		תכנית הכשרת מטפלים תלת-שנתית של מרכז המדבר למיינדפולנס, הפועלת מאז 2011. התכנית משלבת
 		פסיכותרפיה חווייתית בהשראה בודהיסטית עם לימוד תיאורטי, יישום מעשי והכשרה קלינית בגישות

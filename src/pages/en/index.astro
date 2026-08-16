@@ -4,14 +4,11 @@ import Hero from '../../components/Hero.astro';
 import FeatureTriad from '../../components/FeatureTriad.astro';
 import PillButton from '../../components/PillButton.astro';
 import { withBase } from '../../i18n';
+import { pageSeo } from '../../seo';
+const seo = pageSeo.en['/en/'];
 ---
 
-<BaseLayout
-	locale="en"
-	currentPath="/en/"
-	title="Home"
-	description="Dr. Oded Arbel — psychiatrist, integrative psychiatry, mindfulness, and psychedelic psychotherapy."
->
+<BaseLayout locale="en" currentPath="/en/" title={seo.title} description={seo.description}>
 	<Hero
 		title="Dr. Oded Arbel"
 		quote="To be in harmony with the oneness of all things is to be without anxiety about imperfections"

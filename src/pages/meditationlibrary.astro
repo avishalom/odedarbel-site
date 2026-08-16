@@ -1,13 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PasswordGate from '../components/PasswordGate.astro';
+import { pageSeo } from '../seo';
+const seo = pageSeo.he['/meditationlibrary'];
 ---
 
-<BaseLayout
-	locale="he"
-	currentPath="/meditationlibrary"
-	title="ספריית הקלטות מדיטציה"
-	description="ספריית הקלטות מדיטציה מודרכת — גישה מוגנת בסיסמה."
->
+<BaseLayout locale="he" currentPath="/meditationlibrary" title={seo.title} description={seo.description} noindex={seo.noindex}>
 	<PasswordGate locale="he" />
 </BaseLayout>

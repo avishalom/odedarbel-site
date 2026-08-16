@@ -1,13 +1,10 @@
 ---
 import ProsePage from '../components/ProsePage.astro';
+import { pageSeo } from '../seo';
+const seo = pageSeo.he['/tamar-amit'];
 ---
 
-<ProsePage
-	locale="he"
-	currentPath="/tamar-amit"
-	title="תמר עמית"
-	description="תמר עמית — פסיכולוגית קלינית, שותפה בכירה בצוות ההוראה של תוכנית המטפלים."
->
+<ProsePage locale="he" currentPath="/tamar-amit" title={seo.title} description={seo.description}>
 	<p>
 		שותפה בכירה בצוות ההוראה של תוכנית המטפלים. פסיכולוגית קלינית, בוגרת אוניברסיטת בן גוריון
 		ואוניברסיטת רייכמן, ובוגרת התכנית לפסיכותרפיה פסיכדלית. עוסקת בפסיכותרפיה בקליניקות בתל אביב

@@ -1,13 +1,10 @@
 ---
 import ProsePage from '../components/ProsePage.astro';
+import { pageSeo } from '../seo';
+const seo = pageSeo.he['/beershevacenter'];
 ---
 
-<ProsePage
-	locale="he"
-	currentPath="/beershevacenter"
-	title="מרכז לבריאות הנפש באר שבע — מרפאת מיינדפולנס"
-	description="מרפאת המיינדפולנס במרכז לבריאות הנפש באר שבע — קבוצות, טיפולים ותחומי התמחות."
->
+<ProsePage locale="he" currentPath="/beershevacenter" title={seo.title} description={seo.description}>
 	<p>
 		טיפולים מבוססי מיינדפולנס זוכים לפופולריות גוברת בטיפול במגוון רחב של מצבים נפשיים וגופניים.
 	</p>
