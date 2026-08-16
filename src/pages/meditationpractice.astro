@@ -1,5 +1,7 @@
 ---
 import ProsePage from '../components/ProsePage.astro';
+import PillButton from '../components/PillButton.astro';
+import { withBase } from '../i18n';
 ---
 
 <ProsePage
@@ -18,24 +20,19 @@ import ProsePage from '../components/ProsePage.astro';
 		משותפת.
 	</p>
 	<p><strong>סנגהה</strong> — קבוצת אנשים המתרגלת יחד ותומכת זה בזה בתהליך הלימוד וההתפתחות.</p>
-	<h2>מה תמצאו בעמוד זה</h2>
-	<ul>
-		<li>ספריית הקלטות מדיטציה מודרכת (גישה מוגבלת — ראו הערה למטה)</li>
-		<li>שתי קבוצות מדיטציה פעילות — בתל אביב ובמושב טל שחר</li>
-	</ul>
-	<p class="note">
-		<em
-			>הערה: ספריית ההקלטות עדיין בבנייה באתר החדש. באתר הקודם היא הייתה מוגנת בסיסמה וללא מבנה
-			ברור — היא תיבנה מחדש מסודרת לפי סוג תרגול (נשימה, סריקת גוף, חמלה, ישיבה בסגנון זן), עם
-			אורך ותיאור לכל הקלטה.</em
-		>
+	<p>שתי קבוצות מדיטציה פעילות — בתל אביב ובמושב טל שחר.</p>
+	<h2>ספריית הקלטות מודרכות</h2>
+	<p>
+		ספריית ההקלטות המודרכות מיועדת לחברי הקבוצות ומוגנת בסיסמה — פנו לעודד אם אתם משתתפים ואין
+		לכם סיסמה.
+	</p>
+	<p class="cta">
+		<PillButton href={withBase('/meditationlibrary')} variant="outline">לספריית ההקלטות</PillButton>
 	</p>
 </ProsePage>
 
 <style>
-	.note {
-		border-top: 1px solid rgba(26, 43, 60, 0.12);
-		padding-top: var(--space-2);
+	.cta {
 		margin-top: var(--space-3);
 	}
 </style>

@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PasswordGate from '../../components/PasswordGate.astro';
+---
+
+<BaseLayout
+	locale="en"
+	currentPath="/en/meditationlibrary"
+	title="Meditation Recordings Library"
+	description="Guided meditation recordings library — password protected."
+>
+	<PasswordGate locale="en" />
+</BaseLayout>

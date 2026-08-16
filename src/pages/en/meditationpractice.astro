@@ -1,5 +1,7 @@
 ---
 import ProsePage from '../../components/ProsePage.astro';
+import PillButton from '../../components/PillButton.astro';
+import { withBase } from '../../i18n';
 ---
 
 <ProsePage
@@ -18,25 +20,16 @@ import ProsePage from '../../components/ProsePage.astro';
 		possible to work through difficulties through shared conversation.
 	</p>
 	<p><strong>Sangha</strong> — a group of people practicing together and supporting one another through learning and growth.</p>
-	<h2>On this page</h2>
-	<ul>
-		<li>A library of guided meditation recordings (limited access — see note below)</li>
-		<li>Two active meditation groups — in Tel Aviv and in Moshav Tal Shahar</li>
-	</ul>
-	<p class="note">
-		<em
-			>Note: the recordings library is still being rebuilt on the new site. On the previous site it
-			was password-protected with no clear structure — it will be reorganized by practice type
-			(breath awareness, body scan, compassion, Zen-style sitting), with a duration and description
-			for each recording.</em
-		>
+	<p>Two active meditation groups — in Tel Aviv and in Moshav Tal Shahar.</p>
+	<h2>Guided recordings library</h2>
+	<p>The recordings library is for group members and password-protected — contact Oded if you're a participant without a password.</p>
+	<p class="cta">
+		<PillButton href={withBase('/en/meditationlibrary')} variant="outline">Go to the recordings library</PillButton>
 	</p>
 </ProsePage>
 
 <style>
-	.note {
-		border-top: 1px solid rgba(26, 43, 60, 0.12);
-		padding-top: var(--space-2);
+	.cta {
 		margin-top: var(--space-3);
 	}
 </style>

@@ -24,6 +24,8 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npm run build
+        env:
+          GATE_MEDITATION_LIBRARY: ${{ secrets.GATE_MEDITATION_LIBRARY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist

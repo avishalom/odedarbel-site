@@ -1,0 +1,12 @@
+---
+import { getEntry, render } from 'astro:content';
+import ProsePage from '../../../components/ProsePage.astro';
+
+const entry = await getEntry('gated', 'en/meditation-library');
+if (!entry) throw new Error('meditation-library.en entry not found');
+const { Content } = await render(entry);
+---
+
+<ProsePage locale="en" currentPath="/en/meditationlibrary" title={entry.data.title} description={entry.data.description}>
+	<Content />
+</ProsePage>

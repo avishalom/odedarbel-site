@@ -2,15 +2,24 @@
 
 ## Blocked — need input from Oded
 
-- [ ] **Meditation recordings library** (`/meditationpractice`). The original
-      `/meditationrec` page is password-protected; both passwords tried so far
-      (`backwardstep`, `mindthegap`) were rejected. Need the correct password (or a
-      manual export of the recordings — titles, durations, descriptions) to inventory
-      the content and rebuild this section properly. See
-      `docs/meditation-library-review.md` for the reorganization plan once unblocked.
+- [ ] **Therapists program library** (`/therapistdoc` on the old Wix site, linked from
+      the "תכנית המטפלים" post as "ספריית תוכנית המטפלים"). Password tried
+      (`Mindthegap`) was rejected. Need the correct password, or a manual export of the
+      contents, to inventory and rebuild this section.
+- [ ] **Meditation library audio files**: the new site's `/meditationlibrary` (see
+      "Meditation recordings library" below) lists the 4 real recordings (titles,
+      durations, descriptions) but doesn't host the actual audio yet — need the audio
+      files themselves from Oded to embed players, and a decision on whether they
+      should be public or stay behind the password gate.
 
 ## Content
 
+- [x] **Meditation recordings library** (`/meditationlibrary`, `/en/meditationlibrary`):
+      rebuilt as a password-gated page (see `docs/password-gate.md`) listing the 4 real
+      recordings — titles, durations, one-line descriptions — sourced by logging into
+      the original `/meditationrec` with the password Oded gave (`Backwardstep`).
+      `/meditationpractice` now links to it instead of the old Wix page. Audio files
+      themselves still need to be added — see "Blocked" above.
 - [x] Hero photo: replaced the gradient placeholder with the real desert photo, reused
       (with Oded's OK) from psychedelictherapy.co.il, which he co-founded —
       `public/images/hero-desert.jpg`, wired into `src/components/Hero.astro`.
