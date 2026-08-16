@@ -1,5 +1,5 @@
 import { createCipheriv, createHash, randomBytes } from 'node:crypto';
-import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -77,11 +77,45 @@ async function encryptGatedPages(distDir, logger) {
 	logger.info('removed dist/raw-content');
 }
 
+async function findLfsPointerFiles(dir) {
+	const entries = await readdir(dir, { withFileTypes: true });
+	const pointerFiles = [];
+
+	for (const entry of entries) {
+		const filePath = path.join(dir, entry.name);
+		if (entry.isDirectory()) {
+			pointerFiles.push(...(await findLfsPointerFiles(filePath)));
+			continue;
+		}
+
+		if (!entry.isFile()) continue;
+
+		const fileStat = await stat(filePath);
+		if (fileStat.size > 512) continue;
+
+		const start = await readFile(filePath, 'utf8');
+		if (start.startsWith('version https://git-lfs.github.com/spec/v1')) {
+			pointerFiles.push(filePath);
+		}
+	}
+
+	return pointerFiles;
+}
+
 async function copyGatedAssets(distDir, logger) {
 	for (const { source, output } of gatedAssetDirectories) {
 		const sourcePath = path.join(repoRoot, source);
 		const outputPath = path.join(distDir, output);
 		if (!existsSync(sourcePath)) throw new Error(`Gated asset directory not found: ${sourcePath}`);
+
+		const pointerFiles = await findLfsPointerFiles(sourcePath);
+		if (pointerFiles.length > 0) {
+			throw new Error(
+				`Gated assets were checked out as Git LFS pointer files instead of real files:\n${pointerFiles
+					.map((file) => `- ${path.relative(repoRoot, file)}`)
+					.join('\n')}\nEnable Git LFS checkout before running the build.`,
+			);
+		}
 
 		await rm(outputPath, { recursive: true, force: true });
 		await mkdir(path.dirname(outputPath), { recursive: true });
