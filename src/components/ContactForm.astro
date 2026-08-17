@@ -1,0 +1,98 @@
+---
+import type { Locale } from '../i18n';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const t = {
+	he: {
+		firstName: 'שם פרטי',
+		lastName: 'שם משפחה',
+		email: 'אימייל',
+		phone: 'טלפון',
+		message: 'הודעה',
+		submit: 'שלח',
+	},
+	en: {
+		firstName: 'First name',
+		lastName: 'Last name',
+		email: 'Email',
+		phone: 'Phone',
+		message: 'Message',
+		submit: 'Send',
+	},
+}[locale];
+---
+
+<form>
+	<div class="field">
+		<label for="first-name">{t.firstName}<span aria-hidden="true">*</span></label>
+		<input type="text" id="first-name" name="first-name" required autocomplete="given-name" />
+	</div>
+	<div class="field">
+		<label for="last-name">{t.lastName}<span aria-hidden="true">*</span></label>
+		<input type="text" id="last-name" name="last-name" required autocomplete="family-name" />
+	</div>
+	<div class="field">
+		<label for="email">{t.email}<span aria-hidden="true">*</span></label>
+		<input type="email" id="email" name="email" required autocomplete="email" />
+	</div>
+	<div class="field">
+		<label for="phone">{t.phone}<span aria-hidden="true">*</span></label>
+		<input type="tel" id="phone" name="phone" required autocomplete="tel" />
+	</div>
+	<div class="field">
+		<label for="message">{t.message}</label>
+		<textarea id="message" name="message" rows="5"></textarea>
+	</div>
+	<button type="submit">{t.submit}</button>
+</form>
+
+<style>
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		margin-top: var(--space-4);
+	}
+
+	.field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+
+	label {
+		color: var(--color-teal-dark);
+		font-weight: 600;
+	}
+
+	input,
+	textarea {
+		background: var(--color-white);
+		border: 1px solid rgba(92, 58, 24, 0.3);
+		border-radius: 0.5rem;
+		font: inherit;
+		padding: 0.65rem 0.85rem;
+	}
+
+	button[type='submit'] {
+		align-self: flex-start;
+		background: var(--color-teal);
+		border: 2px solid var(--color-teal);
+		border-radius: var(--radius-pill);
+		color: var(--color-white);
+		cursor: pointer;
+		font-weight: 600;
+		margin-top: var(--space-1);
+		padding: 0.85rem 2rem;
+	}
+
+	button[type='submit']:hover {
+		background: var(--color-teal-dark);
+		border-color: var(--color-teal-dark);
+	}
+</style>

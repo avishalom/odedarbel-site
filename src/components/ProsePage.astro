@@ -8,13 +8,14 @@ interface Props {
 	title: string;
 	description: string;
 	noindex?: boolean;
+	proseWidth?: 'narrow' | 'default';
 }
-const { locale, currentPath, title, description, noindex } = Astro.props;
+const { locale, currentPath, title, description, noindex, proseWidth = 'default' } = Astro.props;
 ---
 
 <BaseLayout locale={locale} currentPath={currentPath} title={title} description={description} noindex={noindex}>
 	<section>
-		<div class="container prose">
+		<div class={`container prose prose--${proseWidth}`}>
 			<h1>{title}</h1>
 			<slot />
 		</div>
@@ -27,5 +28,8 @@ const { locale, currentPath, title, description, noindex } = Astro.props;
 	}
 	.prose {
 		max-width: 42rem;
+	}
+	.prose--narrow {
+		max-width: 32rem;
 	}
 </style>

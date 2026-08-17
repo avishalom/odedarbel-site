@@ -1,0 +1,86 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import MeditationPlayer from './MeditationPlayer.astro';
+import { withBase } from '../i18n';
+import { meditationLibraryHref, meditationLibraryTracks } from '../meditationLibrary';
+import { therapistLibraryFiles, therapistLibraryHref } from '../therapistLibrary';
+
+interface Props {
+	page: CollectionEntry<'pages'>;
+}
+
+const { page } = Astro.props;
+const { locale, library } = page.data;
+
+const strings = {
+	he: {
+		downloads: 'קבצים להורדה',
+		download: 'הורדה',
+		play: (title: string) => `נגן את ${title}`,
+		pause: (title: string) => `השהה את ${title}`,
+	},
+	en: {
+		downloads: 'Downloads',
+		download: 'Download',
+		play: (title: string) => `Play ${title}`,
+		pause: (title: string) => `Pause ${title}`,
+	},
+}[locale];
+---
+
+{
+	library === 'meditation' && (
+		<div class="recording-list">
+			{meditationLibraryTracks.map((track) => {
+				const trackText = track[locale];
+				return (
+					<MeditationPlayer
+						title={trackText.title}
+						category={trackText.category}
+						description={trackText.description}
+						duration={track.duration}
+						src={withBase(meditationLibraryHref(track.filename))}
+						downloadLabel={strings.download}
+						playLabel={strings.play(trackText.title)}
+						pauseLabel={strings.pause(trackText.title)}
+					/>
+				);
+			})}
+		</div>
+	)
+}
+
+{
+	library === 'therapist' && (
+		<>
+			<h2>{strings.downloads}</h2>
+			<ul class="document-list">
+				{therapistLibraryFiles.map((filename) => (
+					<li>
+						<a href={withBase(therapistLibraryHref(filename))} download={filename}>
+							{filename.replace(/\.pdf$/i, '')}
+						</a>
+					</li>
+				))}
+			</ul>
+		</>
+	)
+}
+
+<style>
+	.recording-list {
+		display: grid;
+		gap: 1.5rem;
+		margin-block-start: 2rem;
+	}
+
+	.document-list {
+		display: grid;
+		gap: 0.6rem;
+		padding-inline-start: 1.25rem;
+	}
+
+	.document-list a {
+		overflow-wrap: anywhere;
+	}
+</style>

@@ -4,8 +4,11 @@ import Hero from '../components/Hero.astro';
 import FeatureTriad from '../components/FeatureTriad.astro';
 import PillButton from '../components/PillButton.astro';
 import { withBase } from '../i18n';
-import { pageSeo } from '../seo';
-const seo = pageSeo.he['/'];
+import { getCollection } from 'astro:content';
+
+const home = (await getCollection('pages')).find((entry) => entry.data.path === '/');
+if (!home) throw new Error('Missing homepage metadata: src/content/pages/he/index.mdx');
+const seo = home.data;
 ---
 
 <BaseLayout locale="he" currentPath="/" title={seo.title} description={seo.description}>

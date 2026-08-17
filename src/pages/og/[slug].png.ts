@@ -3,8 +3,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
-import { pageSeo } from '../../seo';
 import { uiStrings } from '../../i18n';
+import { getCollection } from 'astro:content';
 
 // Load fonts once at module level. We use WOFF (v1) from fontsource packages
 // because satori's OpenType parser does not support WOFF2.
@@ -109,37 +109,33 @@ function makeCard(ogTitle: string, siteName: string, isHe: boolean): object {
 }
 
 export async function getStaticPaths() {
-	const paths: { params: { slug: string }; props: { locale: 'he' | 'en'; pagePath: string } }[] =
-		[];
+	const entries = await getCollection('pages');
 
-	for (const [locale, pages] of Object.entries(pageSeo) as [
-		'he' | 'en',
-		Record<string, { noindex?: boolean }>,
-	][]) {
-		for (const [pagePath] of Object.entries(pages)) {
-			const pathSlug =
-				pagePath
-					.replace(/^\/en\//, '')
-					.replace(/^\/en$/, '')
-					.replace(/^\//, '')
-					.replace(/\/$/, '') || 'home';
+	return entries.map((entry) => {
+		const pathSlug =
+			entry.data.path
+				.replace(/^\/en\//, '')
+				.replace(/^\/en$/, '')
+				.replace(/^\//, '')
+				.replace(/\/$/, '') || 'home';
 
-			paths.push({ params: { slug: `${locale}-${pathSlug}` }, props: { locale, pagePath } });
-		}
-	}
-
-	return paths;
+		return {
+			params: { slug: `${entry.data.locale}-${pathSlug}` },
+			props: { page: entry.data },
+		};
+	});
 }
 
 export const GET: APIRoute = async ({ props }) => {
-	const { locale, pagePath } = props as { locale: 'he' | 'en'; pagePath: string };
-	const pageData = pageSeo[locale]?.[pagePath];
+	const { page } = props as {
+		page: { locale: 'he' | 'en'; title: string; ogTitle?: string };
+	};
 
-	if (!pageData) return new Response('Not found', { status: 404 });
+	if (!page) return new Response('Not found', { status: 404 });
 
-	const ogTitle = pageData.ogTitle ?? pageData.title;
-	const siteName = uiStrings[locale].siteName;
-	const isHe = locale === 'he';
+	const ogTitle = page.ogTitle ?? page.title;
+	const siteName = uiStrings[page.locale].siteName;
+	const isHe = page.locale === 'he';
 
 	const svg = await satori(makeCard(ogTitle, siteName, isHe) as Parameters<typeof satori>[0], {
 		width: 1200,

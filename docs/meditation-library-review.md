@@ -28,8 +28,9 @@ from `dist` after encryption.
 The page content is rendered from `src/meditationLibrary.ts` through
 `src/components/MeditationPlayer.astro` into both raw gated routes:
 
-- `src/pages/raw-content/meditationlibrary.astro`
-- `src/pages/raw-content/en/meditationlibrary.astro`
+- `src/content/pages/he/meditationlibrary.mdx`
+- `src/content/pages/en/meditationlibrary.mdx`
+- `src/pages/[...slug].astro`
 
 The source MDX files now only contain the page introduction text; track metadata
 and audio links are centralized in the TypeScript helper so the Hebrew and

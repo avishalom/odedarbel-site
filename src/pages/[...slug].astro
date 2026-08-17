@@ -1,0 +1,63 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PasswordGate from '../components/PasswordGate.astro';
+import ProsePage from '../components/ProsePage.astro';
+import PageLibraryAppendix from '../components/PageLibraryAppendix.astro';
+
+type PageEntry = CollectionEntry<'pages'>;
+
+export async function getStaticPaths() {
+	const entries = await getCollection('pages');
+	const paths = [];
+	const toRoute = (path: string) => path.replace(/^\/|\/$/g, '');
+
+	for (const entry of entries) {
+		if (entry.data.pageLayout === 'home') continue;
+
+		paths.push({
+			params: { slug: toRoute(entry.data.path) },
+			props: { entry, isRaw: false },
+		});
+
+		if (entry.data.gate) {
+			paths.push({
+				params: { slug: toRoute(`/raw-content${entry.data.path}`) },
+				props: { entry, isRaw: true },
+			});
+		}
+	}
+
+	return paths;
+}
+
+const { entry, isRaw } = Astro.props as { entry: PageEntry; isRaw: boolean };
+const { Content } = await render(entry);
+const gate = entry.data.gate;
+---
+
+{
+	gate && !isRaw ? (
+		<BaseLayout
+			locale={entry.data.locale}
+			currentPath={entry.data.path}
+			title={gate.lockedTitle}
+			description={gate.lockedDescription}
+			noindex={entry.data.noindex}
+		>
+			<PasswordGate locale={entry.data.locale} />
+		</BaseLayout>
+	) : (
+		<ProsePage
+			locale={entry.data.locale}
+			currentPath={entry.data.path}
+			title={entry.data.title}
+			description={entry.data.description}
+			noindex={entry.data.noindex}
+			proseWidth={entry.data.proseWidth}
+		>
+			<Content />
+			<PageLibraryAppendix page={entry} />
+		</ProsePage>
+	)
+}

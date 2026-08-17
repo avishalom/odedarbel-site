@@ -2,10 +2,10 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import { gatedPages } from './scripts/gated-pages.config.mjs';
+import { loadGatedPages } from './scripts/content-pages.mjs';
 import { gatedPagesIntegration } from './scripts/gated-pages.integration.mjs';
 
-const gatedRouteFragments = gatedPages.flatMap(({ raw, loader }) => [`/${raw}`, `/${loader}`]);
+const gatedRouteFragments = loadGatedPages().flatMap(({ raw, loader }) => [`/${raw}`, `/${loader}`]);
 
 // https://astro.build/config
 export default defineConfig({

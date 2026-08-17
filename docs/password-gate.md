@@ -5,19 +5,21 @@ library) need a soft password gate — enough to keep casual visitors out, not
 real access control. There's no backend, so gating happens entirely client-side
 at build time:
 
-1. **Source content** lives in `src/content/gated/<locale>/<slug>.mdx` — a
+1. **Source content** lives in `src/content/pages/<locale>/<slug>.mdx` — a
    normal MDX content collection entry (see `src/content.config.ts`), editable
-   by anyone comfortable with Markdown.
-2. **Raw page** — `src/pages/raw-content/**` renders that MDX through the
-   normal site layout (`ProsePage` + `BaseLayout`), so it looks like any other
-   page. Astro builds it like any other route. This page uses the real
+   by anyone comfortable with Markdown. The document frontmatter owns the route,
+   SEO metadata, noindex value, gated status, locked title/description, password
+   env var, and page-specific library type.
+2. **Raw page** — `src/pages/[...slug].astro` generates `raw-content/**` for
+   every MDX document with `gate:` frontmatter. The raw page renders the same MDX
+   through the normal site layout (`ProsePage` + `BaseLayout`) and uses the real
    unlocked title.
-3. **Loader page** — the real public route (e.g. `src/pages/meditationlibrary.astro`)
-   renders `<PasswordGate />`: a password field plus a hidden payload
-   placeholder (`__GATE_IV__` / `__GATE_CIPHER__`). It can use the SEO entry's
-   `lockedTitle` and `lockedDescription` so browser/SEO metadata is generic
-   before unlock; after unlock, the full decrypted raw document replaces it and
-   the tab switches to the real page metadata.
+3. **Loader page** — the same dynamic route also generates the real public route
+   and renders `<PasswordGate />`: a password field plus a hidden payload
+   placeholder (`__GATE_IV__` / `__GATE_CIPHER__`). It uses the MDX frontmatter's
+   `gate.lockedTitle` and `gate.lockedDescription` so browser/SEO metadata is
+   generic before unlock; after unlock, the full decrypted raw document replaces
+   it and the tab switches to the real page metadata.
 4. **Astro build integration** (`scripts/gated-pages.integration.mjs`, registered
    in `astro.config.mjs`)
    reads each raw page's full rendered HTML document, encrypts it (AES-256-GCM, key =
@@ -50,7 +52,8 @@ at build time:
 ## Passwords
 
 Passwords are **not** committed to the repo. They come from environment
-variables, one per gated page (see `scripts/gated-pages.config.mjs`):
+variables, one per gated page. The variable name is read from each gated MDX
+document's `gate.passwordEnv` frontmatter:
 
 - **Local dev/build**: copy `.env.example` to `.env` (gitignored) and fill in
   real values. The Astro build integration reads `.env` automatically.
@@ -59,14 +62,11 @@ variables, one per gated page (see `scripts/gated-pages.config.mjs`):
 
 ## Adding a new gated page
 
-1. Add `src/content/gated/<locale>/<slug>.mdx` with the real content.
-2. Add a raw page under `src/pages/raw-content/` that renders it via
-   `getEntry`/`render` + `ProsePage`.
-3. Add a loader page using `<PasswordGate locale={...} />`.
-4. Add an entry to `scripts/gated-pages.config.mjs` with a new `passwordEnv`
-   name.
-5. If the page has downloadable assets, keep them under `gated-assets/`, add
+1. Add `src/content/pages/<locale>/<slug>.mdx` with the real content.
+2. Add `gate.passwordEnv`, `gate.lockedTitle`, `gate.lockedDescription`, and
+   `noindex: true` to the MDX frontmatter.
+3. If the page has downloadable assets, keep them under `gated-assets/`, add
    the directory to `gatedAssetDirectories`, and make sure asset links are only
    rendered by the raw encrypted page.
-6. Add that env var to `.env.example` and to the deploy workflow's `env:`
+4. Add that env var to `.env.example` and to the deploy workflow's `env:`
    block, and set the matching GitHub Actions secret (`gh secret set <NAME>`).

@@ -27,21 +27,27 @@ pins `node-version: 22` for this reason; do not downgrade it).
 ## Architecture
 
 - **Bilingual routing**: `astro.config.mjs` sets `i18n.locales: ['he', 'en']` with
-  `he` as the default (unprefixed) locale. Hebrew pages live at `src/pages/*.astro`;
-  English equivalents are the same filename under `src/pages/en/`. There is no
-  automatic content sync between them — each language's copy is hand-written in its
-  own `.astro` file, so any content change on one side needs to be applied to the
-  other manually.
+  `he` as the default (unprefixed) locale. Most editable pages live as MDX under
+  `src/content/pages/<locale>/` and are rendered by `src/pages/[...slug].astro`.
+  Each document's frontmatter is the source of truth for route path, locale, SEO
+  title/description, Open Graph title, page layout, noindex, prose width, gated status, locked
+  title/description, and page-specific library type. Keep Hebrew and English as
+  separate MDX documents; there is no automatic content sync between them.
+- **Astro page files are for custom layouts only**: the homepages remain
+  `src/pages/index.astro` and `src/pages/en/index.astro` because their layout is
+  bespoke, but their metadata still comes from
+  `src/content/pages/{he,en}/index.mdx`. For ordinary content pages, prefer MDX plus
+  `ProsePage.astro`; use components inside MDX only for necessary interactive or
+  repeated UI such as buttons, forms, players, or file lists.
 - **`src/i18n.ts`** is the single source of truth for per-locale nav items and UI
   strings (`nav`, `uiStrings`, `dir`). `Nav.astro` and `Footer.astro` read from it
   rather than hardcoding labels.
 - **`src/layouts/BaseLayout.astro`** sets `<html lang dir>` per locale, loads Google
   Fonts, and renders the skip link + `Nav` + `<main>` + `Footer`. All pages should go
   through this (directly, or via `ProsePage.astro` for simple text pages).
-- **`src/components/ProsePage.astro`** wraps `BaseLayout` for the simple
-  text-only pages (Tamar Amit, therapists program, meditation practice, etc.) — use it
-  instead of duplicating the `<section><div class="container prose">` boilerplate for
-  any new simple content page.
+- **`src/components/ProsePage.astro`** wraps `BaseLayout` for simple MDX pages
+  (Tamar Amit, therapists program, meditation practice, etc.) — use it instead of
+  duplicating the `<section><div class="container prose">` boilerplate.
 - **Design tokens** (`src/styles/tokens.css`) hold the color palette, font stacks
   (separate Hebrew/Latin display and body fonts), spacing scale, and shared component
   classes (`.container`, `section.cream`, focus-visible outlines, skip link). Colors
@@ -51,7 +57,7 @@ pins `node-version: 22` for this reason; do not downgrade it).
   the raw scraped source content from the original Wix site as a reference/archive.
   `docs/password-gate.md` documents the client-side encrypted password-gate mechanism
   used for the meditation library (`src/components/PasswordGate.astro`,
-  `scripts/encrypt-gated.mjs`). `docs/therapist-library-download.md` tracks an
+  `scripts/gated-pages.integration.mjs`). `docs/therapist-library-download.md` tracks an
   in-progress task (downloading 30 PDFs off the old Wix site via git LFS) — check
   `TODO.md`'s "Blocked" section and that file before starting related work.
 - **Deploy**: `.github/workflows/deploy.yml` builds and deploys to GitHub Pages via
