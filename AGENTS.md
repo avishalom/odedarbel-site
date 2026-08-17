@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+There is no `BOOST.md` include for this repository; use this file and `TODO.md` as the local project instructions.
+
 ## What this repo is
 
 A custom-coded rebuild of [odedarbel.com](https://www.odedarbel.com/) (currently a Wix
